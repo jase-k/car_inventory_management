@@ -15,6 +15,32 @@ var exists = fs.existsSync(dbFile);
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(dbFile);
 
+//Sample Cars
+var chevyCar = {
+  make: "Chevy",
+  model: "Impala",
+  year: 2008,
+  price: "$7,500",
+  color: "grey",
+  description: "New Tires! Only 120,000 miles. Will do very well in the snow.",
+  image: "chevy-imapala.jpg",
+  specs: ["12.4L", "Gasoline", "Automatic", "28 city/ 42 hwy"],
+  highlights: ["Bluetooth", "Sun Roof", "LightWeight"]
+}
+var fordCar = {
+  id: 13,
+  make: "Ford",
+  model: "Fusion",
+  year: 2014,
+  price: "$10,500",
+  color: "silver",
+  description: 'New Battery! Only 70,000 miles. Lot of Life Left!',
+  image: "ford-fusion.jpg",
+  specs: ["1.4L", "Gasoline", "Automatic", "26 city/ 38 hwy"],
+  highlights: ["Bluetooth", "Satellite Radio", "Keyless Entry", "Traction Control"]
+}
+
+
 // if ./.data/sqlite.db does not exist, create it, otherwise print records to console
 db.serialize(()=>{
   db.run('DROP TABLE IF EXISTS Inventory');
