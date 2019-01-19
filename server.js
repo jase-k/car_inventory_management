@@ -224,7 +224,7 @@ return str.split(",")
 }
 
 app.post('/addnewcar', function(request, response){
-  var carObject = request.query
+  var carObject = request.body
  
   if(typeof carObject.specs === 'string'){
     console.log("Specs is String")
@@ -235,11 +235,7 @@ if(typeof carObject.highlights === 'string'){
   carObject.highlights = stringToArray(carObject.highlights)
   }
   
-  addCar(carObject).then(results => function (results){
-    if(results === "Success"){
-      response.send("Car Added to Database")
-  }else{ response.send("Whoops Something Went Wrong")}
-    })
+  addCar(carObject).then(results => response.send(results))
   
 });
 

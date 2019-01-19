@@ -4,7 +4,7 @@ const addCarForm = document.getElementById('add-car-form')
 // Send a Car to the DataBase
 //==========================================
 console.log(submitButton)
-
+/*
 submitButton.onclick = () =>{
 console.log(addCarForm.elements)
 var formData =  {
@@ -35,3 +35,4 @@ console.log("Sent Request..")
   xhr.send();
   }else{ alert("Please Complete the Form before Submitting")}
 }
+*/
