@@ -41,7 +41,8 @@ var fordCar = {
 }
 
 
-// if ./.data/sqlite.db does not exist, create it, otherwise print records to console
+//Creates the Tables Below in the Database. (Will Need to Delete to Store Data)
+/*
 db.serialize(()=>{
   db.run('DROP TABLE IF EXISTS Inventory');
   db.run('CREATE TABLE Inventory (id INTEGER PRIMARY KEY, make TEXT NOT NULL, model TEXT NOT NULL, year INTEGER NOT NULL, price TEXT NOT NULL, color TEXT, description TEXT, specs_id INTEGER, highlights_id INTEGER, image TEXT)');
@@ -49,7 +50,7 @@ db.serialize(()=>{
   db.run('CREATE TABLE Specs (id INTEGER PRIMARY KEY, inventory_id INTEGER NOT NULL, specs1, specs2, specs3, specs4, specs5, specs6, specs7, specs8, specs9, specs10)')
   db.run('DROP TABLE IF EXISTS Highlights')
   db.run('CREATE TABLE Highlights (id INTEGER PRIMARY KEY, inventory_id INTEGER NOT NULL, highlights1, highlights2, highlights3, highlights4, highlights5, highlights6, highlights7, highlights8, highlights9, highlights10)')
-})
+})*/
 //========================================
 // Start of Functions Adding Cars to Database
 //=========================================
@@ -115,8 +116,8 @@ function addCar(object){
   });
 }
 
- addCar(chevyCar);
- addCar(fordCar);
+// addCar(chevyCar); 
+// addCar(fordCar);
 //========================================
 // End of Functions Adding Cars to Database
 //=========================================
@@ -193,6 +194,7 @@ getCarInventory(id)
 .then(data => resolve(data))
   });
 }
+
 getCarById(2).then(data => console.log(data))
 //========================================
 // End of Functions Adding Cars to Database
