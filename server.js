@@ -223,21 +223,6 @@ function stringToArray(str){
 return str.split(",")
 }
 
-function appendResults(str){
-  var div = document.createElement('div')
-  var p = document.createElement('p')
-  var h2 = document.createElement('h2')
-  var a = document.createElement('a')
-  p.innerHTML = str;
-  h2.innerHTML = "Add Another Car";
-  a.href = "/addcar"
-  a.appendChild(h2)
-  div.appendChild(p)
-  div.appendChild(a)
-  
-  return div
-}
-
 app.post('/addnewcar', function(request, response){
   var carObject = request.body
  
@@ -249,7 +234,7 @@ if(typeof carObject.highlights === 'string'){
     console.log("Highlights is String")
   carObject.highlights = stringToArray(carObject.highlights)
   }
-  addCar(carObject).then(results => response.send(alert(results)))
+  addCar(carObject).then(results => response.send(results))
   
 });
 

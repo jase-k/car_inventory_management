@@ -1,5 +1,5 @@
 const submitButton = document.getElementById('submit-button')
-
+const formData = document.getElementById('add-car-form')
 //==========================================
 // Send a Car to the DataBase
 //==========================================
