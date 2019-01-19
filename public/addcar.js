@@ -9,7 +9,7 @@ const xhr = new XMLHttpRequest;
 const url = "/addnewcar";
 console.log("Sent Request..")
   xhr.responseType ="json";
-const data =  JSON.stringify({
+xhr.data =  JSON.stringify({
   id: 13,
   make: "Ford",
   model: "Fusion",
@@ -26,7 +26,7 @@ const data =  JSON.stringify({
             
         }
   }
-  console.log("Data Sent", data)
+  console.log("Data Sent", xhr.data)
   xhr.open('POST', url)
-  xhr.send(data);
+  xhr.send(xhr.data);
 }
