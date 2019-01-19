@@ -224,7 +224,7 @@ return str.split(",")
 }
 
 app.post('/addnewcar', function(request, response){
-  var carObject = request.body
+  var carObject = request.query
  
   if(typeof carObject.specs === 'string'){
     console.log("Specs is String")
@@ -238,6 +238,16 @@ if(typeof carObject.highlights === 'string'){
   addCar(carObject).then(results => response.send(results))
   
 });
+
+db.all('SELECT * FROM Inventory', (err, row)=>{
+    console.log("Inventory Table:", row)
+  });
+db.all('SELECT * FROM Specs', (err, row)=>{
+      console.log("Specs Table:", row)
+    });
+db.all('SELECT * FROM Highlights', (err, row)=>{
+        console.log("Higlights Table:", row)
+      });
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {

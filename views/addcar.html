@@ -16,7 +16,7 @@
       </nav>
     </header>
     <div class="container">
-      <form id="add-car-form" class="addcar" action="/addnewcar" method="POST">
+      <form id="add-car-form" class="addcar" >
         <div class="form-section">
       Make:<input type="text" name="make" placeholder="Make" required />
       Model:<input type="text" name="model" placeholder="Model" required>
@@ -34,7 +34,9 @@
         Highlights:<input type="text" name="highlights" placeholder="Seperate by a ',' (comma)" required>
       </div>
         Image:<input type="file" name="image" accept="image/*">
-        <input id="submit-button" type="submit" name="SubmitCar" value="Submit">
+        <button id="submit-button" name="SubmitCar" value="Submit">
+          
+        </button> 
       </form>
     </div>
   </body>
