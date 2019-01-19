@@ -46,16 +46,35 @@ div {
 /* Inventory Feed */
 .listing {
   display: flex;
+  max-height: 400px;
+  margin: 20px auto;
 }
-.image{
+.image {
   max-width: 49%;
   content: center;
   margin-right: auto; 
   margin-left: auto;
-  display: block;
-  height:
+  justify-content: center;
 }
-
+.image img{
+  max-width: 100%;
+  max-height: 100%;
+}
+.details{
+    background-color: grey;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.quick-facts{
+  display: flex;
+}
+.specs-highlights{
+  display: flex;
+  background-color: lightgrey;
+}
 
 /*addcar.html */
 input{
