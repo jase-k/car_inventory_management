@@ -2,8 +2,9 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="/addcar.css">
+    <title>Add a Car to Your Inventory</title>
+    <link rel="stylesheet" href="/style.css">
+
   </head>
   <body>
     <header>
@@ -15,24 +16,24 @@
     </header>
     <div class="container">
       <form class="addcar" action="<!--On Submit this needs to post to server.js-->" method="post">
-        <div class="">
+        <div class="form-section">
       Make:<input type="text" name="" placeholder="Make" required />
       Model:<input type="text" name="" placeholder="Model" required>
       </div>
-        <div class="">
+        <div class="form-section">
             Year:<input type="text" name="" placeholder="Year" required>
             Price:<input type="text" name="" placeholder="Price" required>
       </div>
-        <div>
+        <div class="form-section">
         Color:<input type="text" name="" placeholder="Color" required>
         Description:<input type="text" name="" placeholder="Description"  required>
       </div>
-      <div>
+      <div class="form-section">
         Specs:<input type="text" name="" placeholder="Seperate by a ',' (comma)" required>
         Highlights:<input type="text" name="" placeholder="Seperate by a ',' (comma)" required>
       </div>
         Image:<input type="file" name="img" accept="image/*">
-        <input type="submit" name="SubmitCar" value="Submit">
+        <input id="submit-button" type="submit" name="SubmitCar" value="Submit">
       </form>
     </div>
   </body>
