@@ -84,7 +84,8 @@ function getValues(array){
 
 //Adds a Car to the Database (All Tables)
 function addCar(object){
-    db.run('INSERT INTO Inventory (make, model, year, price, color, description, image) VALUES ($make, $model, $year, $price, $color, $description, $image)',
+return new Promise ((resolve, reject) =>{
+  db.run('INSERT INTO Inventory (make, model, year, price, color, description, image) VALUES ($make, $model, $year, $price, $color, $description, $image)',
       {
       $make: object.make,
       $model: object.model,
@@ -95,25 +96,34 @@ function addCar(object){
       $image: object.image
       },
      function(err){
-      if(err){console.log(err)}
+      if(err){console.log(err)
+      reject("Failed At: Inventory Table")     
+             }
       console.log(this.lastID)
       var inventory_id = this.lastID //saves Row Id to use in the other tables
 
 //Adds a Row into the Specs Table with the New Inventory Table Rows' Id
       db.run('INSERT INTO Specs (inventory_id,'+getColumns(object.specs, "Specs")+') VALUES('+inventory_id+','+getValues(object.specs)+')',
       function(err){
-        if(err){console.log(err)}
+        if(err){
+          console.log(err)
+          reject("Failed At: Specs Table")}
         console.log("inventory_id", inventory_id)
         console.log("specs_id", this.lastID)
 
 //Adds a Row into the Higlights Table with the New Inventory Table Rows' Id
       db.run('INSERT INTO Highlights (inventory_id,'+getColumns(object.highlights, "Highlights")+') VALUES('+inventory_id+','+getValues(object.highlights)+')',
       function(err){
-        console.log(err);
+        if(err){
+          console.log(err);
+          reject("Failed At: Highlights Table")
+        }
         console.log("highlights_id:", this.lastID)
+        resolve("Success")  
         })
       });
-  });
+    });
+  })
 }
 
 // addCar(chevyCar); 
@@ -207,6 +217,18 @@ app.get('/', function(request, response) {
 
 app.get('/addcar', function(request, response) {
   response.sendFile(__dirname + '/views/addcar.html');
+});
+
+app.post('/addnewcar', function(request, response){
+  var carObject = request.body.carObject
+  function checkSuccess(str){
+    if(str=== "Success"){
+      response.send("Car Added to Database")
+  }else{ response.send("Whoops Something Went Wrong")}
+    }
+  
+  addCar(carObject).then(results => checkSuccess(results))
+  
 });
 
 // listen for requests :)
