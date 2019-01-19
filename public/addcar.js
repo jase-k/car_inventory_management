@@ -1,21 +1,23 @@
 const submitButton = document.getElementById('submit-button')
-
+const addCarForm = document.getElementById('add-car-form')
 //==========================================
 // Send a Car to the DataBase
 //==========================================
 console.log(submitButton)
+
 submitButton.onclick = () =>{
+console.log(addCarForm.elements)
 var formData =  {
   id: 13,
-  make: "Ford",
-  model: "Fusion",
-  year: 2014,
-  price: "$10,500",
-  color: "silver",
-  description: 'New Battery! Only 70,000 miles. Lot of Life Left!',
-  image: "ford-fusion.jpg",
-  specs: ["1.4L", "Gasoline", "Automatic", "26 city/ 38 hwy"],
-  highlights: ["Bluetooth", "Satellite Radio", "Keyless Entry", "Traction Control"]
+  make: addCarForm[0].value,
+  model: addCarForm[1].value,
+  year: addCarForm[2].value,
+  price: addCarForm[3].value,
+  color: addCarForm[4].value,
+  description: addCarForm[0].value,
+  image: addCarForm[0].value,
+  specs: addCarForm[0].value,
+  highlights: addCarForm[0].value
 }
 
 const xhr = new XMLHttpRequest;  
@@ -25,10 +27,10 @@ console.log("Sent Request..")
   xhr.responseType ="json";
   xhr.onreadystatechange = () =>{
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            
+            console.log(xhr.response)
         }
   }
   console.log("Data Sent", xhr.data)
   xhr.open('POST', url)
-  xhr.send("make=Ford&Model=Focus");
+  xhr.send();
 }
