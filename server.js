@@ -15,7 +15,7 @@ var exists = fs.existsSync(dbFile);
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(dbFile);
 
-//Sample Cars
+//Sample Car Objects
 var chevyCar = {
   make: "Chevy",
   model: "Impala",
@@ -49,10 +49,77 @@ db.serialize(()=>{
   db.run('CREATE TABLE Specs (id INTEGER PRIMARY KEY, inventory_id INTEGER NOT NULL, specs1, specs2, specs3, specs4, specs5, specs6, specs7, specs8, specs9, specs10)')
   db.run('DROP TABLE IF EXISTS Highlights')
   db.run('CREATE TABLE Highlights (id INTEGER PRIMARY KEY, inventory_id INTEGER NOT NULL, highlights1, highlights2, highlights3, highlights4, highlights5, highlights6, highlights7, highlights8, highlights9, highlights10)')
-
 })
+//========================================
+// Start of Functions Adding Cars to Database
+//=========================================
 
+//Gets Column String for Table (Specs and Higlights)
+function getColumns(array, table){
+  var columns = '';
+  var table_lowercase = table.toLowerCase()
+
+for(var i = 1; i <= array.length; i++){
+  if(i !== array.length){
+    columns += "'"+table_lowercase+i+"',"
+  }else{ //String Can't end in a ','
+    columns += "'"+table_lowercase+i+"'"
+    return columns
+    }
+  }
+};
+
+//Gets Value for Sqlite Tables (Specs and Higlights)
+function getValues(array){
+  var values = '';
+  for(var i = 0; i < array.length; i++){
+  if(i !== array.length-1){
+      values += "'"+array[i]+"',"
+  }else{ //String Can't end in a ','
+      values += "'"+array[i]+"'" }
+    };
+  return values
+}
+
+//Adds a Car to the Database (All Tables)
+function addCar(object){
+    db.run('INSERT INTO Inventory (make, model, year, price, color, description, image) VALUES ($make, $model, $year, $price, $color, $description, $image)',
+      {
+      $make: object.make,
+      $model: object.model,
+      $year: object.year,
+      $price: object.price,
+      $color: object.color,
+      $description: object.description,
+      $image: object.image
+      },
+     function(err){
+      if(err){console.log(err)}
+      console.log(this.lastID)
+      var inventory_id = this.lastID //saves Row Id to use in the other tables
+
+//Adds a Row into the Specs Table with the New Inventory Table Rows' Id
+      db.run('INSERT INTO Specs (inventory_id,'+getColumns(object.specs, "Specs")+') VALUES('+inventory_id+','+getValues(object.specs)+')',
+      function(err){
+        if(err){console.log(err)}
+        console.log("inventory_id", inventory_id)
+        console.log("specs_id", this.lastID)
+
+//Adds a Row into the Higlights Table with the New Inventory Table Rows' Id
+      db.run('INSERT INTO Highlights (inventory_id,'+getColumns(object.highlights, "Highlights")+') VALUES('+inventory_id+','+getValues(object.highlights)+')',
+      function(err){
+        console.log(err);
+        console.log("highlights_id:", this.lastID)
+        })
+      });
+  });
+}
+//========================================
+// End of Functions Adding Cars to Database
+//=========================================
   
+
+
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
