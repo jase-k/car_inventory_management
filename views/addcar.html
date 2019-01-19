@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/addcar.css">
+  </head>
+  <body>
+    <header>
+      <h1>Dealership Inventory Management</h1>
+      <nav>
+        <h3><a href="/">Inventory</a></h3>
+        <h3><a href="./addcar">Add Car</a></h3>
+      </nav>
+    </header>
+    <div class="container">
+      <form class="addcar" action="<!--On Submit this needs to post to server.js-->" method="post">
+        <div class="">
+      Make:<input type="text" name="" placeholder="Make" required />
+      Model:<input type="text" name="" placeholder="Model" required>
+      </div>
+        <div class="">
+            Year:<input type="text" name="" placeholder="Year" required>
+            Price:<input type="text" name="" placeholder="Price" required>
+      </div>
+        <div>
+        Color:<input type="text" name="" placeholder="Color" required>
+        Description:<input type="text" name="" placeholder="Description"  required>
+      </div>
+      <div>
+        Specs:<input type="text" name="" placeholder="Seperate by a ',' (comma)" required>
+        Highlights:<input type="text" name="" placeholder="Seperate by a ',' (comma)" required>
+      </div>
+        Image:<input type="file" name="img" accept="image/*">
+        <input type="submit" name="SubmitCar" value="Submit">
+      </form>
+    </div>
+  </body>
+</html>

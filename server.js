@@ -205,7 +205,9 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-
+app.get('/addcar', function(request, response) {
+  response.sendFile(__dirname + '/views/addcar.html');
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
