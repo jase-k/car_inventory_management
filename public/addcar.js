@@ -3,7 +3,7 @@ const addCarForm = document.getElementById('add-car-form')
 //==========================================
 // Send a Car to the DataBase
 //==========================================
-console.log(submitButton)
+//console.log(submitButton)
 
 submitButton.onclick = () =>{
 console.log(addCarForm.elements)
@@ -27,9 +27,9 @@ console.log("Sent Request..")
   xhr.responseType ="json";
   xhr.onreadystatechange = () =>{
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            console.log(xhr.response)
+            alert(xhr.response)
         }
-  }
+  } 
   console.log("Data Sent", xhr.data)
   xhr.open('POST', url)
   xhr.send();
