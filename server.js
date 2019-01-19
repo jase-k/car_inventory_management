@@ -223,6 +223,10 @@ function stringToArray(str){
 return str.split(",")
 }
 
+function appendResults(str){
+  
+}
+
 app.post('/addnewcar', function(request, response){
   var carObject = request.body
  
