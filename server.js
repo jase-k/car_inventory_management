@@ -220,8 +220,8 @@ app.get('/addcar', function(request, response) {
 });
 
 app.post('/addnewcar', function(request, response){
-  var carObject = request.body
-  console.log("Request Body", request.body)
+  var carObject = request.query
+  console.log("Request Body", request.query)
   
   
   addCar(carObject).then(results => function (results){

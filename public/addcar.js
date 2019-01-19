@@ -6,10 +6,8 @@ const submitButton = document.getElementById('submit-button')
 console.log(submitButton)
 submitButton.onclick = () =>{
 const xhr = new XMLHttpRequest;
-const url = "/addnewcar";
-console.log("Sent Request..")
-  xhr.responseType ="json";
-xhr.data =  JSON.stringify({
+  
+var formData =  {
   id: 13,
   make: "Ford",
   model: "Fusion",
@@ -20,7 +18,10 @@ xhr.data =  JSON.stringify({
   image: "ford-fusion.jpg",
   specs: ["1.4L", "Gasoline", "Automatic", "26 city/ 38 hwy"],
   highlights: ["Bluetooth", "Satellite Radio", "Keyless Entry", "Traction Control"]
-})
+}
+const url = "/addnewcar?make=Ford&model=Fusion";
+console.log("Sent Request..")
+  xhr.responseType ="json";
   xhr.onreadystatechange = () =>{
         if (xhr.readyState === XMLHttpRequest.DONE) {
             
@@ -28,5 +29,5 @@ xhr.data =  JSON.stringify({
   }
   console.log("Data Sent", xhr.data)
   xhr.open('POST', url)
-  xhr.send(xhr.data);
+  xhr.send("make=Ford&Model=Focus");
 }
