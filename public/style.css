@@ -44,6 +44,10 @@ div {
   background-color: white;
 }
 /* Inventory Feed */
+h4{
+  margin: 3px;
+  font-size: 0.8rem;
+}
 .listing {
   display: flex;
   max-height: 400px;
@@ -61,19 +65,33 @@ div {
   max-height: 100%;
 }
 .details{
-    background-color: grey;
+    background-color: #A9A9A9	;
     margin: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    border-radius: 10px;
 }
 .quick-facts{
-  display: flex;
+  display: flex;  
+  border-radius: 10px;
+  background-color: #D3D3D3;
+}
+.quick-facts p{
+  margin-left: 10px;
 }
 .specs-highlights{
   display: flex;
-  background-color: lightgrey;
+  background-color: #D3D3D3;
+  border-radius: 10px;
+}
+.description {
+  border-radius: 10px;
+  background-color: #D3D3D3;
+}
+.description p{
+  margin: 3px 5px;
 }
 
 /*addcar.html */
