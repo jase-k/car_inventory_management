@@ -234,6 +234,7 @@ if(typeof carObject.highlights === 'string'){
     console.log("Highlights is String")
   carObject.highlights = stringToArray(carObject.highlights)
   }
+  
   addCar(carObject).then(results => response.send(results))
   
 });
