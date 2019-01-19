@@ -220,14 +220,15 @@ app.get('/addcar', function(request, response) {
 });
 
 app.post('/addnewcar', function(request, response){
-  var carObject = request.body.carObject
-  function checkSuccess(str){
-    if(str=== "Success"){
+  var carObject = request.body
+  console.log("Request Body", request.body)
+  
+  
+  addCar(carObject).then(results => function (results){
+    if(results === "Success"){
       response.send("Car Added to Database")
   }else{ response.send("Whoops Something Went Wrong")}
-    }
-  
-  addCar(carObject).then(results => checkSuccess(results))
+    })
   
 });
 
