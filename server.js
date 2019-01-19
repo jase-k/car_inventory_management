@@ -219,9 +219,16 @@ app.get('/addcar', function(request, response) {
   response.sendFile(__dirname + '/views/addcar.html');
 });
 
+function stringToArray(str){
+return str.split(",")
+}
 app.post('/addnewcar', function(request, response){
   var carObject = request.query
-  console.log("Request Body", request.query)
+  if(typeof carObject.specs === 'string'){
+    console.log("Specs is String")
+    stringToArray(carO
+  }
+
   
   
   addCar(carObject).then(results => function (results){

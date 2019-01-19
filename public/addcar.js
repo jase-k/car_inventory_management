@@ -5,8 +5,6 @@ const submitButton = document.getElementById('submit-button')
 //==========================================
 console.log(submitButton)
 submitButton.onclick = () =>{
-const xhr = new XMLHttpRequest;
-  
 var formData =  {
   id: 13,
   make: "Ford",
@@ -19,7 +17,10 @@ var formData =  {
   specs: ["1.4L", "Gasoline", "Automatic", "26 city/ 38 hwy"],
   highlights: ["Bluetooth", "Satellite Radio", "Keyless Entry", "Traction Control"]
 }
-const url = "/addnewcar?make=Ford&model=Fusion";
+
+const xhr = new XMLHttpRequest;  
+const url = `/addnewcar?make=${formData.make}&model=${formData.model}&year=${formData.year}&price=${formData.price}
+&color=${formData.color}&description=${formData.description}&image=${formData.image}&specs=${formData.specs}&highlights=${formData.highlights}`;
 console.log("Sent Request..")
   xhr.responseType ="json";
   xhr.onreadystatechange = () =>{
