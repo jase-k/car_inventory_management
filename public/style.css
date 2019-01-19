@@ -43,6 +43,20 @@ div {
   margin: 20px; 
   background-color: white;
 }
+/* Inventory Feed */
+.listing {
+  display: flex;
+}
+.image{
+  max-width: 49%;
+  content: center;
+  margin-right: auto; 
+  margin-left: auto;
+  display: block;
+  height:
+}
+
+
 /*addcar.html */
 input{
   margin: 4px;
