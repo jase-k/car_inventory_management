@@ -1,71 +1,46 @@
-/* styles */
-/* called by your view template */
-
-* {
-  box-sizing: border-box;
-}
 
 body {
-  font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
-  margin: 2em;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
-  font-style: italic;
-  color: #373fff;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
-
-.bold {
-  font-weight: bold;
+/*-- Header --*/
+header{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
-
-p {
-  max-width: 600px;
+nav{
+  min-width: 33%;
+  display: flex;
 }
-
-form {
-  margin-bottom: 25px;
-  padding: 15px;
-  background-color: cyan;
-  display: inline-block;
+h1{
+  margin-left: 10px;
+}
+h3{
+  margin-right: 20px;
+}
+/* Inventory Display Section */
+section{
   width: 100%;
-  max-width: 340px;
-  border-radius: 3px;
+  height: 500px;
+  background-color: blue;
+  padding-top: 20px;
+
+}
+div {
+  width: 80%;
+  height: 100px;
+  margin: 20px; 
+  background-color: white;
 }
 
-input {
-  display: block;
-  margin-bottom: 10px;
-  padding: 5px;
-  width: 100%;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-  font-size: 16px;
-}
-
-button {
-  font-size: 16px;
-  border-radius: 3px;
-  background-color: lightgrey;
-  border: 1px solid grey;
-  box-shadow: 2px 2px teal;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: yellow;
-}
-
-button:active {
-  box-shadow: none;
-}
-
-li {
-  margin-bottom: 5px;
-}
-
-footer {
-  margin-top: 50px;
-  padding-top: 25px;
-  border-top: 1px solid lightgrey;
-}
