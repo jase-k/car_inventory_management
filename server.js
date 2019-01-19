@@ -239,6 +239,9 @@ if(typeof carObject.highlights === 'string'){
   
 });
 
+
+//Uncomment Below to Print Tables in Console
+/*
 db.all('SELECT * FROM Inventory', (err, row)=>{
     console.log("Inventory Table:", row)
   });
@@ -248,7 +251,7 @@ db.all('SELECT * FROM Specs', (err, row)=>{
 db.all('SELECT * FROM Highlights', (err, row)=>{
         console.log("Higlights Table:", row)
       });
-
+*/
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
