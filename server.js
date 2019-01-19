@@ -114,10 +114,89 @@ function addCar(object){
       });
   });
 }
+
+ addCar(chevyCar);
+ addCar(fordCar);
 //========================================
 // End of Functions Adding Cars to Database
 //=========================================
-  
+
+//========================================
+// Start of Functions Getting Cars from the Database
+//=========================================  
+function getCarInventory(id){
+  var carObject = {};
+return new Promise((resolve, reject) =>{
+    db.get('SELECT * FROM Inventory WHERE id = $id', {$id: id},
+        function(err, row){
+          if(err){console.log(err)}
+          if(row == undefined){reject("Couldn't Find Car by Id")}
+            carObject = {
+              id: row.id,
+              make: row.make,
+              model: row.model,
+              year: row.year,
+              price: row.price,
+              color: row.color,
+              description: row.description,
+              image: row.image
+              }
+            resolve(carObject)
+          })
+    })
+};
+function getCarSpecs(carObject){
+return new Promise((resolve, reject) => {
+  var specsArray = [];
+  db.get('SELECT * FROM Specs WHERE inventory_id = $id',{$id: carObject.id},
+  (err, row) =>{
+  if(err){console.log(err)}
+  if(row == undefined){reject("Couldn't Find Specs Row")}
+
+      for(var i = 1; i <= 10; i++){
+        if(row["specs"+i]){
+          specsArray.push(row["specs"+i])
+        }
+      }
+      carObject.specs = specsArray
+      resolve(carObject)
+    })
+ })
+}
+function getCarHighlights(carObject){
+  var highlightsArray = [];
+  return new Promise((resolve, reject) => {
+    db.get('SELECT * FROM Highlights WHERE inventory_id = $id',{$id: carObject.id},
+    function(err, row){
+    if(err){console.log(err);}
+    if(row == undefined){reject("Couldn't Find Highlights Row")}
+        for(var i = 1; i <= 10; i++){
+          if(row['highlights'+i]){
+            highlightsArray.push(row['highlights'+i])
+          }
+        }
+    carObject.highlights = highlightsArray
+        resolve(carObject)
+      });
+  })
+}
+
+/*
+Wraps the Promise Functions Above to Retrieve
+Car Data and Returns an Object.
+*/
+function getCarById(id){
+return new Promise((resolve, reject) =>{
+getCarInventory(id)
+.then(data => getCarSpecs(data))
+.then(data => getCarHighlights(data))
+.then(data => resolve(data))
+  });
+}
+getCarById(2).then(data => console.log(data))
+//========================================
+// End of Functions Adding Cars to Database
+//=========================================
 
 
 app.get('/', function(request, response) {
