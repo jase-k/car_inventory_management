@@ -145,16 +145,23 @@ var listingDiv =  createElement("div", "listing")
         var descriptionP = createElement("p", null, descriptionDiv)
             descriptionP.innerHTML = array[i].description
     listingDiv.id = array[i].id
-    var anchor = createElement("a", null)
-    anchor.href="/editcar"+
-    anchor.appendChild(listingDiv)
-    display.appendChild(anchor)
+      
+  listingDiv.onclick = (event) =>{
+     findListingId(event.target)
+    }
+    display.appendChild(listingDiv)
     }
   console.log("listing Div", listingDiv)
 
   return;
   }
-
+function findListingId(element){
+  var el;
+  while(el.className !== 'listing' || !el.className.parentNode){
+     el = el.parentNode
+  }
+  return el.id
+}
 //==========================================================
 // Adding Click to Edit Functionality
 //=========================================================
