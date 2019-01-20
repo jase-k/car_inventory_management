@@ -1,6 +1,6 @@
 const display = document.getElementById('inventory-holder')
+var numberOfListings = 0;
 
-console.log(document)
 
 
 const xhr = new XMLHttpRequest;  
@@ -10,6 +10,7 @@ console.log("Sent Request..")
   xhr.onreadystatechange = () =>{
         if (xhr.readyState === XMLHttpRequest.DONE) {
              formatResponse(xhr.response)
+            
         }
   } 
   console.log("Data Sent", xhr.data)
@@ -144,7 +145,10 @@ var listingDiv =  createElement("div", "listing")
         var descriptionP = createElement("p", null, descriptionDiv)
             descriptionP.innerHTML = array[i].description
     listingDiv.id = array[i].id
-    display.appendChild(listingDiv)
+    var anchor = createElement("a", null)
+    anchor.href="/editcar"+
+    anchor.appendChild(listingDiv)
+    display.appendChild(anchor)
     }
   console.log("listing Div", listingDiv)
 
@@ -154,7 +158,7 @@ var listingDiv =  createElement("div", "listing")
 //==========================================================
 // Adding Click to Edit Functionality
 //=========================================================
-var inventoryListings = display.children
+var inventoryListings = document.getElementsByClassName('listing')
 
 
 console.log("inventory Listings", inventoryListings)
