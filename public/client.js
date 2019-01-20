@@ -157,8 +157,10 @@ var listingDiv =  createElement("div", "listing")
     listingDiv.id = array[i].id
       
   listingDiv.onclick = (event) =>{
-  console.log("event target", event.path)
+    console.log("event target", event.path)
    goToEditPage(findListingId(event.path))
+  console.log(window)
+    window.location
   }
     display.appendChild(listingDiv)
     }
