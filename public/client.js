@@ -13,7 +13,7 @@ console.log("Sent Request..")
   xhr.open('Get', url)
   xhr.send();
 //What needs to be created
- /*<div class="listing">
+ <div class="listing">
         <div class="image">
           <img src="https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/8640.jpg" />
         </div>
@@ -86,8 +86,9 @@ function createElement(type, className, parentElement){
 
 function formatResponse(array){
   console.log(array)
+  var inventorySection = createElement("section", "inventory-holder")
+for(var i = 0; i < array.length; i++){ 
 var listingDiv =  createElement("div", "listing")
-  
   var imageDiv = createElement("div", "image", listingDiv)
     var image = createElement("img", null , imageDiv)
     image.src = "https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/8640.jpg" // array[i].image
@@ -96,26 +97,27 @@ var listingDiv =  createElement("div", "listing")
     var quickfactsDiv = createElement("div", "quick-facts", detailsDiv)  
       var quickfactsChildDiv1 = createElement("div", "quickfactsDiv", quickfactsDiv)
         var makeH3 = createElement("h3", "make", quickfactsChildDiv1)
-          makeH3.innerHTML = array[0].make
+          makeH3.innerHTML = array[i].make
         var modelH3 = createElement("h3", "model", quickfactsChildDiv1)
-          modelH3.innerHTML = array[0].model
+          modelH3.innerHTML = array[i].model
         var yearH3 = createElement("h3", "year", quickfactsChildDiv1)
-          yearH3.innerHTML = array[0].year
+          yearH3.innerHTML = array[i].year
       var quickfactsChildDiv2 = createElement("div", "quickfactsDiv", quickfactsDiv)
         var priceH4 = createElement("h4", null , quickfactsChildDiv2)
-          
+            priceH4.innerHTML = "PRICE:"
         var priceP = createElement("p", "price", quickfactsChildDiv2)
-            priceP.innerHTML = array[0].price
+            priceP.innerHTML = array[i].price
         var colorH4 = createElement("h4", null, quickfactsChildDiv2)
-          
+            colorH4.innerHTML = "COLOR:"
         var colorP = createElement("p", "color", quickfactsChildDiv2)
-            colorP.innerHTML = array[0].color
+            colorP.innerHTML = array[i].color
     var specshighlightsDiv = createElement("div", "specs-highlights", detailsDiv)
     
     var descriptionDiv = createElement("div", "description", detailsDiv)
-
+    display.appendChild(listingDiv)
+    }
 
   console.log("listing Div", listingDiv)
 
-  return listingDiv
+  return inventorySection
   }
