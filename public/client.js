@@ -12,8 +12,8 @@ console.log("Sent Request..")
   console.log("Data Sent", xhr.data)
   xhr.open('Get', url)
   xhr.send();
-/* What needs to be created
- <div class="listing">
+//What needs to be created
+ /*<div class="listing">
         <div class="image">
           <img src="https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/8640.jpg" />
         </div>
@@ -75,21 +75,26 @@ console.log("Sent Request..")
           </div>
         </div>
   </div> */
-function createElement(type, className){
+function createElement(type, className, parentElement){
   var element = document.createElement(type)
   element.classList.add(className)
-  return element
+  if(parentElement){
+    parentElement.appendChild(element)
+  }
+    return element
 }
 
 function formatResponse(array){
   console.log(array)
 var listingDiv =  createElement("div", "listing")
-var imageDiv = createElement("div", "image")
-var detailsDiv = createElement("div", "details")
-  console.log("listing Div", listingDiv)
+var imageDiv = createElement("div", "image", listingDiv)
+var detailsDiv = createElement("div", "details", listingDiv)
+var image = createElement("div", 'img', imageDiv)
+image.src = "https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/8640.jpg"
+
+console.log("listing Div", listingDiv)
+
 imageDiv.innerHTML = array[0].make;
 detailsDiv.innerHTML = array[1].make;
-  listingDiv.appendChild(imageDiv)
-  listingDiv.appendChild(detailsDiv)
   return listingDiv
   }
