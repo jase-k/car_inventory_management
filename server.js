@@ -266,7 +266,7 @@ db.each('SELECT * FROM Specs',
           specsArray.push(specsObject)
                 },   
   function (err, AllRows){
-        resolve(specsArray)
+  combineTableData(carObject, specsArray).then(results => resolve(results))
             }
            )
     })
@@ -289,16 +289,20 @@ getAllIds().then(results => console.log(results))
 getAllCarInventory().then(results => console.log(results))
 getAllSpecs().then(results => console.log(results))
 
-function combineTableData(inventory, specs, highlights){
+function combineTableData(inventory, specs){
+ return new Promise((resolve, reject) => { 
   for(var i = 0; i < inventory.length; i++){
     for(var j =0; j<specs.length; j++){
       if(inventory[i].id === specs[j].inventory_id){
-        inventory[i].specs = specs[j].
-        }
+        inventory[i].specs = specs[j].specs_array
+        break;
+        } 
       }
-  }
+    }
+  resolve(inventory)
+  });
 }
-
+ 
 function AllCarInventory(ids){
 return new Promise((resolve, reject) =>{
   for(var i = 0; i < ids.length; i++){
