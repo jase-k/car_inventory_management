@@ -244,10 +244,33 @@ db.each('SELECT * FROM Inventory',
 };
 
 function getAllSpecs(carObject){
-return new Promise ((resolve, reject) =>{
-  db.get('SELECT * FROM Specs Where inventory_id = $id', {$id: carObject.id}  
-  });
-}
+  var carArray = [];
+  var highlightsArray = [];
+  var specsArray = [];
+  var specsObject = {};
+return new Promise((resolve, reject) =>{
+db.each('SELECT * FROM Specs',
+        function(err, row){
+          if(err){console.log(err)}
+          if(row == undefined){reject("Couldn't Find Car by Id")}
+          specsObject ={
+            id: row.id,
+            inventory_id: row.inventory_id,
+            specs_array: []
+          }
+    for(var i = 1; i <= 10; i++){
+      if(row['specs'+i]){
+        specsObject.specs_array.push(row['specs'+i])
+      }
+    }
+          specsArray.push(specsObject)
+                },   
+  function (err, AllRows){
+        resolve(specsArray)
+            }
+           )
+    })
+} 
 
 function getAllIds(){
 return new Promise ((resolve, reject) =>{  
@@ -264,6 +287,18 @@ db.each('SELECT * FROM Inventory', (err, row)=>{
 
 getAllIds().then(results => console.log(results))
 getAllCarInventory().then(results => console.log(results))
+getAllSpecs().then(results => console.log(results))
+
+function combineTableData(inventory, specs, highlights){
+  for(var i = 0; i < inventory.length; i++){
+    for(var j =0; j<specs.length; j++){
+      if(inventory[i].id === specs[j].inventory_id){
+        inventory[i].specs = specs[j].
+        }
+      }
+  }
+}
+
 function AllCarInventory(ids){
 return new Promise((resolve, reject) =>{
   for(var i = 0; i < ids.length; i++){
