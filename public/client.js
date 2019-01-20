@@ -13,7 +13,7 @@ console.log("Sent Request..")
   xhr.open('Get', url)
   xhr.send();
 //What needs to be created
- <div class="listing">
+ /*<div class="listing">
         <div class="image">
           <img src="https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/8640.jpg" />
         </div>
@@ -96,8 +96,20 @@ var listingDiv =  createElement("div", "listing")
     var quickfactsDiv = createElement("div", "quick-facts", detailsDiv)  
       var quickfactsChildDiv1 = createElement("div", "quickfactsDiv", quickfactsDiv)
         var makeH3 = createElement("h3", "make", quickfactsChildDiv1)
-        var modelH3 = create
+          makeH3.innerHTML = array[0].make
+        var modelH3 = createElement("h3", "model", quickfactsChildDiv1)
+          modelH3.innerHTML = array[0].model
+        var yearH3 = createElement("h3", "year", quickfactsChildDiv1)
+          yearH3.innerHTML = array[0].year
       var quickfactsChildDiv2 = createElement("div", "quickfactsDiv", quickfactsDiv)
+        var priceH4 = createElement("h4", null , quickfactsChildDiv2)
+          
+        var priceP = createElement("p", "price", quickfactsChildDiv2)
+            priceP.innerHTML = array[0].price
+        var colorH4 = createElement("h4", null, quickfactsChildDiv2)
+          
+        var colorP = createElement("p", "color", quickfactsChildDiv2)
+            colorP.innerHTML = array[0].color
     var specshighlightsDiv = createElement("div", "specs-highlights", detailsDiv)
     
     var descriptionDiv = createElement("div", "description", detailsDiv)
@@ -105,6 +117,5 @@ var listingDiv =  createElement("div", "listing")
 
   console.log("listing Div", listingDiv)
 
-detailsDiv.innerHTML = array[1].make;
   return listingDiv
   }
