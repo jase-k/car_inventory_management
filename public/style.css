@@ -50,8 +50,8 @@ h4{
 }
 .listing {
   display: flex;
-  max-height: 400px;
   margin: 20px auto;
+  border-radius: 20px;
 }
 .image {
   max-width: 49%;
@@ -66,20 +66,23 @@ h4{
 }
 .details{
     background-color: #A9A9A9	;
-    margin: 5px;
+    margin: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 .quick-facts{
-  display: flex;  
+  display: block;  
   border-radius: 10px;
   background-color: #D3D3D3;
 }
-.quick-facts p{
-  margin-left: 10px;
+.quickfactsDiv{
+  display:flex;
+  justify-content: space-around;
+  margin: 10px auto;
+  background-color: #D3D3D3;
 }
 .specs-highlights{
   display: flex;
@@ -113,3 +116,8 @@ input{
   padding: 10px;
 }
 
+@media only screen and (max-width: 800px){
+  .listing{
+    flex-direction: column;
+  }
+}
