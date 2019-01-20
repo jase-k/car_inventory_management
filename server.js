@@ -214,6 +214,8 @@ getCarById(2).then(data => console.log(data))
 //=========================================
 function getAllCarInventory(){
   var carArray = [];
+  var highlightsArray = [];
+  var specsArray = [];
   var carObject = {};
 return new Promise((resolve, reject) =>{
     db.each('SELECT * FROM Inventory',
@@ -229,8 +231,7 @@ return new Promise((resolve, reject) =>{
               color: row.color,
               description: row.description,
               image: row.image
-              }
-            resolve(carObject)      
+              }     
   db.get('SELECT * FROM Specs WHERE inventory_id = $id',{$id: carObject.id},
   (err, row) =>{
   if(err){console.log(err)}
@@ -243,19 +244,7 @@ return new Promise((resolve, reject) =>{
       }
       carObject.specs = specsArray
       resolve(carObject)
-    })
-          },   
-          function (err, AllRows){
-            }
-            
-           )
-    })
-};
-
-function getCarHighlights(carObject){
-  var highlightsArray = [];
-  return new Promise((resolve, reject) => {
-    db.get('SELECT * FROM Highlights WHERE inventory_id = $id',{$id: carObject.id},
+       db.get('SELECT * FROM Highlights WHERE inventory_id = $id',{$id: carObject.id},
     function(err, row){
     if(err){console.log(err);}
     if(row == undefined){reject("Couldn't Find Highlights Row")}
@@ -265,10 +254,18 @@ function getCarHighlights(carObject){
           }
         }
     carObject.highlights = highlightsArray
-        resolve(carObject)
-      });
+     carArray.push(carObject) 
+       });  
   })
-}
+          },   
+          function (err, AllRows){
+        resolve(carArray)
+            }
+           )
+    })
+};
+
+
 //========================================
 // End of Functions Getting All Cars from the Database
 //=========================================
@@ -302,9 +299,15 @@ if(typeof carObject.highlights === 'string'){
   
 });
 
+app.get('/allcars', function(request, response){
+  
+  getAllCarInventory().then(data => response.json(data))
+  
+});
+
 
 //Uncomment Below to Print Tables in Console
-/*
+
 db.all('SELECT * FROM Inventory', (err, row)=>{
     console.log("Inventory Table:", row)
   });
@@ -314,7 +317,7 @@ db.all('SELECT * FROM Specs', (err, row)=>{
 db.all('SELECT * FROM Highlights', (err, row)=>{
         console.log("Higlights Table:", row)
       });
-*/
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
