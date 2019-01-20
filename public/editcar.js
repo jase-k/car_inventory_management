@@ -1,4 +1,4 @@
-console.log(document)
+console.log(document.)
 
 const submitButton = document.getElementById('submit-button')
 const addCarForm = document.getElementById('add-car-form')
