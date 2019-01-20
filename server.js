@@ -362,11 +362,6 @@ if(typeof carObject.highlights === 'string'){
   
 });
 
-function addHTML(data){
-return(
-  <div></div>
-)
-}
 
 app.get('/allcars', function(request, response){
   
