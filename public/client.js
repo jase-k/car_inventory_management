@@ -99,7 +99,7 @@ for(var i = 0; i < array.length; i++){
 var listingDiv =  createElement("div", "listing")
   var imageDiv = createElement("div", "image", listingDiv)
     var image = createElement("img", null , imageDiv)
-    image.src = "https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/8640.jpg" // array[i].image
+    image.src = array[i].image
 
   var detailsDiv = createElement("div", "details", listingDiv)
     var quickfactsDiv = createElement("div", "quick-facts", detailsDiv)  
@@ -128,6 +128,7 @@ var listingDiv =  createElement("div", "listing")
         var highlightsList = createListElements(array[i].highlights, "highlights", specshighlightsDiv)
     var descriptionDiv = createElement("div", "description", detailsDiv)
         var descriptionH4 = createElement("h4", null, descriptionDiv)
+            descriptionH4.innerHTML = "Description:"
         var descriptionP = createElement("p", null, descriptionDiv)
             descriptionP.innerHTML = array[i].description
     display.appendChild(listingDiv)
