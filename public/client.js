@@ -9,7 +9,7 @@ console.log("Sent Request..")
   xhr.responseType ="json";
   xhr.onreadystatechange = () =>{
         if (xhr.readyState === XMLHttpRequest.DONE) {
-             display.appendChild(formatResponse(xhr.response))
+             formatResponse(xhr.response))
         }
   } 
   console.log("Data Sent", xhr.data)
@@ -149,17 +149,20 @@ var listingDiv =  createElement("div", "listing")
     }
   console.log("listing Div", listingDiv)
 
-  return inventorySection
+  return;
   }
 
 //==========================================================
 // Adding Click to Edit Functionality
 //=========================================================
+var inventoryListings = display
 
-const inventoryListings = document.getElementsByClassName('listing')
 console.log("inventory Listings", inventoryListings)
 
 inventoryListings.forEach(function(listing){
-listing.onclick = (event) =>
+
+  listing.onclick = (event) => {
+console.log(event.target)
+}
 
 });
