@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Add a Car to Your Inventory</title>
+    <link rel="stylesheet" href="/style.css">
+<!-- import the webpage's client-side javascript file -->
+    <script src="/addcar.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Dealership Inventory Management</h1>
+      <nav>
+        <h3><a href="/">Inventory</a></h3>
+        <h3><a href="./addcar">Add Car</a></h3>
+      </nav>
+    </header>
+    <div class="container">
+      <form id="add-car-form" class="addcar" >
+        <div class="form-section">
+      Make:<input type="text" name="make" placeholder="Make" required />
+      Model:<input type="text" name="model" placeholder="Model" required>
+      </div>
+        <div class="form-section">
+            Year:<input type="text" name="year" placeholder="Year" required>
+            Price:<input type="text" name="price" placeholder="Price" required>
+      </div>
+        <div class="form-section">
+        Color:<input type="text" name="color" placeholder="Color" required>
+        Description:<input type="text" name="description" placeholder="Description"  required>
+      </div>
+      <div class="form-section">
+        Specs:<input type="text" name="specs" placeholder="Seperate by a ',' (comma)" required>
+        Highlights:<input type="text" name="highlights" placeholder="Seperate by a ',' (comma)" required>
+      </div>
+        Image:<input type="text" name="image" placeholder="Image URL">
+        <button id="submit-button" name="SubmitCar" value="Submit">
+          Submit
+        </button> 
+      </form>
+    </div>
+  </body>
+</html>

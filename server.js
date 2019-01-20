@@ -369,6 +369,9 @@ app.get('/allcars', function(request, response){
   
 });
 
+app.get('/editcar/:id', function(request, response){
+
+});
 
 //Uncomment Below to Print Tables in Console
 /*
