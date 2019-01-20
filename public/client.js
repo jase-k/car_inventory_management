@@ -158,9 +158,11 @@ var listingDiv =  createElement("div", "listing")
       
   listingDiv.onclick = (event) =>{
     console.log("event target", event.path)
-   goToEditPage(findListingId(event.path))
+   var id = findListingId(event.path)
   console.log(window)
-    window.location
+  var url = window.location.origin+"/editcar/"+id+""
+  console.log(url)
+  location.href = url
   }
     display.appendChild(listingDiv)
     }
@@ -169,17 +171,3 @@ var listingDiv =  createElement("div", "listing")
   return;
   }
 
-function goToEditPage(id){
-const xhr = new XMLHttpRequest;  
-const url = `/editcar/${id}`
-console.log("Sent Request..")
-  xhr.responseType ="json";
-  xhr.onreadystatechange = () =>{
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-             xhr.response
-        }
-  } 
-  console.log("Data Sent")
-  xhr.open('Get', url)
-  xhr.send();
-}

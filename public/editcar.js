@@ -12,7 +12,7 @@ const addCarForm = document.getElementById('add-car-form')
 //==========================================
 //console.log(submitButton)
 const xhr = new XMLHttpRequest;  
-const url = `/editcar?id`+id;
+const url = `/editcar?${id}`;
 console.log("Sent Request..")
   xhr.responseType ="json";
   xhr.onreadystatechange = () =>{
