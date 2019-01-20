@@ -13,7 +13,7 @@ console.log("Sent Request..")
   xhr.open('Get', url)
   xhr.send();
 //What needs to be created
- <div class="listing">
+ /* <div class="listing">
         <div class="image">
           <img src="https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/8640.jpg" />
         </div>
@@ -84,6 +84,14 @@ function createElement(type, className, parentElement){
     return element
 }
 
+function createListElements(array, className, ParentElement){
+  var ul = createElement("ul", className)
+    for(var i=0; i < array.length; i++){
+    var li = createElement("li", null, ul)
+      li.innerHTML = array[i]
+    }
+ParentElement.appendChild(ul)
+}
 function formatResponse(array){
   console.log(array)
   var inventorySection = createElement("section", "inventory-holder")
@@ -113,19 +121,17 @@ var listingDiv =  createElement("div", "listing")
             colorP.innerHTML = array[i].color
     var specshighlightsDiv = createElement("div", "specs-highlights", detailsDiv)
         var specsH4 = createElement("h4", null, specshighlightsDiv)
-        var specsList = createElement("ul", "specs", specshighlightsDiv)
+            specsH4.innerHTML = "Specs:"
+        var specsList = createListElements(array[i].specs, "specs", specshighlightsDiv)
         var highlightsH4 = createElement("h4", null, specshighlightsDiv)
-        var highlightsUl = createElement("ul", "highlights", specshighlightsDiv)
+            highlightsH4.innerHTML = "Highlights:"
+        var highlightsList = createListElements(array[i].highlights, "highlights", specshighlightsDiv)
     var descriptionDiv = createElement("div", "description", detailsDiv)
+        var descriptionH4 = createElement("h4", null, descriptionDiv)
+        var descriptionP = createElement("p", null, descriptionDiv)
+            descriptionP.innerHTML = array[i].description
     display.appendChild(listingDiv)
     }
-function createListElements(array, className){
-  var ul = createElement("ul", className)
-    for(var i=0; i < array.length; i++){
-    var li = createElement("li", null, ul)
-      li.innerHTML = array[i]
-    }
-}
   console.log("listing Div", listingDiv)
 
   return inventorySection
