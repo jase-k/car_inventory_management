@@ -133,6 +133,7 @@ var listingDiv =  createElement("div", "listing")
             descriptionH4.innerHTML = "Description:"
         var descriptionP = createElement("p", null, descriptionDiv)
             descriptionP.innerHTML = array[i].description
+    listingDiv.id = array[i].id
     display.appendChild(listingDiv)
     }
   console.log("listing Div", listingDiv)

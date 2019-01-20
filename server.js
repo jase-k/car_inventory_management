@@ -294,11 +294,9 @@ db.each('SELECT * FROM Highlights',
         highlightsObject.array.push(row['highlights'+i])
       }
     }
-          console.log("Row", row)
           highlightsArray.push(highlightsObject)
                 },   
   function (err, AllRows){
-  console.log(highlightsArray)
   combineTableData(carObject, highlightsArray, 'highlights').then(results => resolve(results))
             }
            )
@@ -332,7 +330,7 @@ getAllCarInventory()
 //========================================
 // End of Functions Getting All Cars from the Database
 //=========================================
- 
+  
 
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
@@ -376,9 +374,9 @@ app.get('/editcar/:id', function(request, response){
 
 app.get('/editcar', function(request, response){
   var id = request.query.id
-  
+  getCarById(id).then(results => console.log(results))
 });
-
+ 
 //Uncomment Below to Print Tables in Console
 /*
 db.all('SELECT * FROM Inventory', (err, row)=>{
@@ -391,6 +389,7 @@ db.all('SELECT * FROM Highlights', (err, row)=>{
         console.log("Higlights Table:", row)
       });
 */
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
