@@ -211,6 +211,9 @@ getCarInventory(id)
 //========================================
 // Start of Functions Getting All Cars from the Database
 //=========================================
+function getArrayIndexById(array, id){
+}
+
 function getAllCarInventory(){
   var carArray = [];
   var highlightsArray = [];
@@ -230,39 +233,21 @@ db.each('SELECT * FROM Inventory',
               color: row.color,
               description: row.description,
               image: row.image
-              }     
-  db.get('SELECT * FROM Specs WHERE inventory_id = $id',{$id: carObject.id},
-  (err, row) =>{
-  if(err){console.log(err)}
-  if(row == undefined){reject("Couldn't Find Specs Row")}
-
-      for(var i = 1; i <= 10; i++){
-        if(row["specs"+i]){
-          specsArray.push(row["specs"+i])
-        }
-      }
-      carObject.specs = specsArray
- db.get('SELECT * FROM Highlights WHERE inventory_id = $id',{$id: carObject.id},
-    function(err, row){
-    if(err){console.log(err);}
-    if(row == undefined){reject("Couldn't Find Highlights Row")}
-        for(var i = 1; i <= 10; i++){
-          if(row['highlights'+i]){
-            highlightsArray.push(row['highlights'+i])
-          }
-        }
-    carObject.highlights = highlightsArray
-    carArray.push(carObject)
-    console.log(carArray)
-       });  
-  })
+              }
+      carArray.push(carObject)
           },   
-          function (err, AllRows){
+  function (err, AllRows){
         resolve(carArray)
             }
            )
     })
 };
+
+function getAllSpecs(carObject){
+return new Promise ((resolve, reject) =>{
+  db.get('SELECT * FROM Specs Where inventory_id = $id', {$id: carObject.id}  
+  });
+}
 
 function getAllIds(){
 return new Promise ((resolve, reject) =>{  
@@ -276,12 +261,15 @@ db.each('SELECT * FROM Inventory', (err, row)=>{
        );
   });
 };
-getAllIds().then(results => console.log(results))
 
-function AllCarInventory(){
+getAllIds().then(results => console.log(results))
+getAllCarInventory().then(results => console.log(results))
+function AllCarInventory(ids){
 return new Promise((resolve, reject) =>{
-  
-});
+  for(var i = 0; i < ids.length; i++){
+    
+    } 
+  });
 }
 
 //========================================
