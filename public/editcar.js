@@ -9,10 +9,28 @@ const submitButton = document.getElementById('submit-button')
 const addCarForm = document.getElementById('add-car-form')
 
 //input Fields///
+const makeField = document.getElementById('make')
+const modelField = document.getElementById('model')
+const yearField = document.getElementById('year')
+const priceField = document.getElementById('price')
+const colorField = document.getElementById('color')
+const descriptionField = document.getElementById('description')
+const imageField = document.getElementById('image')
+const specsField = document.getElementById('specs')
+const highlightsField = document.getElementById('highlights')
+
 function presetInputFields(object){
+  console.log("makeField", makeField)
+  makeField.value = object.make
+  modelField.value = object.model
+  yearField.value = object.year
+  priceField.value = object.price
+  colorField.value = object.color
+  descriptionField = object.description
+  specsField = object.specs.join(",")
+  highlightsField = object.highlights.join(",")
 }
 
-console.log($('[name="make"]'))
 //==========================================
 // Send a Car to the DataBase
 //==========================================
@@ -23,7 +41,8 @@ console.log("Sent Request..")
   xhr.responseType ="json";
   xhr.onreadystatechange = () =>{
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            presetInputFields(xhr.response)
+          console.log(xhr.response)  
+          presetInputFields(xhr.response)
         }
   } 
   xhr.open('GET', url)
