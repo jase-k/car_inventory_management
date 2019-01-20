@@ -205,7 +205,6 @@ getCarInventory(id)
   });
 }
 
-getCarById(2).then(data => console.log(data))
 //========================================
 // End of Functions Getting 1 Car from the Database
 //=========================================
@@ -218,7 +217,7 @@ function getAllCarInventory(){
   var specsArray = [];
   var carObject = {};
 return new Promise((resolve, reject) =>{
-    db.each('SELECT * FROM Inventory',
+db.each('SELECT * FROM Inventory',
         function(err, row){
           if(err){console.log(err)}
           if(row == undefined){reject("Couldn't Find Car by Id")}
@@ -243,8 +242,7 @@ return new Promise((resolve, reject) =>{
         }
       }
       carObject.specs = specsArray
-      resolve(carObject)
-       db.get('SELECT * FROM Highlights WHERE inventory_id = $id',{$id: carObject.id},
+ db.get('SELECT * FROM Highlights WHERE inventory_id = $id',{$id: carObject.id},
     function(err, row){
     if(err){console.log(err);}
     if(row == undefined){reject("Couldn't Find Highlights Row")}
@@ -254,7 +252,8 @@ return new Promise((resolve, reject) =>{
           }
         }
     carObject.highlights = highlightsArray
-     carArray.push(carObject) 
+    carArray.push(carObject)
+    console.log(carArray)
        });  
   })
           },   
@@ -307,7 +306,7 @@ app.get('/allcars', function(request, response){
 
 
 //Uncomment Below to Print Tables in Console
-
+/*
 db.all('SELECT * FROM Inventory', (err, row)=>{
     console.log("Inventory Table:", row)
   });
@@ -317,7 +316,7 @@ db.all('SELECT * FROM Specs', (err, row)=>{
 db.all('SELECT * FROM Highlights', (err, row)=>{
         console.log("Higlights Table:", row)
       });
-
+*/
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);

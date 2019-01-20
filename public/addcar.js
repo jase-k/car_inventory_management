@@ -14,9 +14,9 @@ var formData =  {
   price: addCarForm[3].value,
   color: addCarForm[4].value,
   description: addCarForm[5].value,
-  image: addCarForm[6].value,
-  specs: addCarForm[7].value,
-  highlights: addCarForm[8].value
+  specs: addCarForm[6].value,
+  highlights: addCarForm[7].value,
+  image: addCarForm[8].value
 }
 // ||formData.model !== ''||formData.year !== ''||formData.price !== ''||formData.color !== ''  ||formData.description !== ''||formData.specs !== '' || formData.highlights !== ''
 if(formData.make !== ''){
