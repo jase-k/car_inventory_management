@@ -209,6 +209,19 @@ getCarInventory(id)
 // End of Functions Getting 1 Car from the Database
 //=========================================
 //========================================
+// Start of Functions Updating Car from the Database
+//=========================================
+function updateInventory(object){
+  var sql = `UPDATE Inventory
+            SET make = ${object.make}`
+  db.run(sql, {$id:object.id})
+}
+
+
+//========================================
+// End of Functions Updating Car from the Database
+//=========================================
+//========================================
 // Start of Functions Getting All Cars from the Database
 //=========================================
 
