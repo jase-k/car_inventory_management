@@ -374,6 +374,7 @@ app.get('/editcar/:id', function(request, response){
 
 app.get('/editcar', function(request, response){
   var id = request.query.id 
+  console.log(id)
   getCarById(id).then(results => console.log(results))
 });
  

@@ -7,21 +7,26 @@ console.log(id)
 
 const submitButton = document.getElementById('submit-button')
 const addCarForm = document.getElementById('add-car-form')
+
+//input Fields///
+function presetInputFields(object){
+}
+
+console.log($('[name="make"]'))
 //==========================================
 // Send a Car to the DataBase
 //==========================================
 //console.log(submitButton)
 const xhr = new XMLHttpRequest;  
-const url = `/editcar?${id}`;
+const url = `/editcar?id=${id}`;
 console.log("Sent Request..")
   xhr.responseType ="json";
   xhr.onreadystatechange = () =>{
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            alert(xhr.response)
+            presetInputFields(xhr.response)
         }
   } 
-  console.log("Data Sent", xhr.data)
-  xhr.open('POST', url)
+  xhr.open('GET', url)
   xhr.send();
 
 
