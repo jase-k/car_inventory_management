@@ -256,21 +256,50 @@ db.each('SELECT * FROM Specs',
           specsObject ={
             id: row.id,
             inventory_id: row.inventory_id,
-            specs_array: []
+            array: []
           }
     for(var i = 1; i <= 10; i++){
       if(row['specs'+i]){
-        specsObject.specs_array.push(row['specs'+i])
+        specsObject.array.push(row['specs'+i])
       }
     }
           specsArray.push(specsObject)
                 },   
   function (err, AllRows){
-  combineTableData(carObject, specsArray).then(results => resolve(results))
+  combineTableData(carObject, specsArray, 'specs').then(results => resolve(results))
             }
            )
     })
-} 
+}
+
+function getAllHighlights(carObject){
+  var highlightsArray = [];
+  var highlightsObject = {};
+return new Promise((resolve, reject) =>{
+db.each('SELECT * FROM Highlights',
+        function(err, row){
+          if(err){console.log(err)}
+          if(row == undefined){reject("Couldn't Find Car by Id")}
+          highlightsObject ={
+            id: row.id,
+            inventory_id: row.inventory_id,
+            array: []
+          }
+    for(var i = 1; i <= 10; i++){
+      if(row['highlights'+i]){
+        highlightsObject.array.push(row['highlights'+i])
+      }
+    }
+          console.log("Row", row)
+          highlightsArray.push(highlightsObject)
+                },   
+  function (err, AllRows){
+  console.log(highlightsArray)
+  combineTableData(carObject, highlightsArray, 'highlights').then(results => resolve(results))
+            }
+           )
+    })
+}  
 
 function getAllIds(){
 return new Promise ((resolve, reject) =>{  
@@ -285,16 +314,14 @@ db.each('SELECT * FROM Inventory', (err, row)=>{
   });
 };
 
-getAllIds().then(results => console.log(results))
-getAllCarInventory().then(results => console.log(results))
-getAllSpecs().then(results => console.log(results))
 
-function combineTableData(inventory, specs){
+
+function combineTableData(inventory, array, type){
  return new Promise((resolve, reject) => { 
   for(var i = 0; i < inventory.length; i++){
-    for(var j =0; j<specs.length; j++){
-      if(inventory[i].id === specs[j].inventory_id){
-        inventory[i].specs = specs[j].specs_array
+    for(var j =0; j<array.length; j++){
+      if(inventory[i].id === array[j].inventory_id){
+        inventory[i][type] = array[j].array
         break;
         } 
       }
@@ -310,7 +337,10 @@ return new Promise((resolve, reject) =>{
     } 
   });
 }
-
+getAllIds().then(results => console.log(results))
+getAllCarInventory().then(results => getAllSpecs(results))
+.then(results => getAllHighlights(results))
+.then(results => console.log(results))
 //========================================
 // End of Functions Getting All Cars from the Database
 //=========================================
@@ -339,7 +369,7 @@ if(typeof carObject.highlights === 'string'){
     console.log("Highlights is String")
   carObject.highlights = stringToArray(carObject.highlights)
   }
-  
+   
   addCar(carObject).then(results => response.send(results))
   
 });
