@@ -147,7 +147,8 @@ var listingDiv =  createElement("div", "listing")
     listingDiv.id = array[i].id
       
   listingDiv.onclick = (event) =>{
-     findListingId(event.target)
+  console.log("event target", event.path)
+    findListingId(event.path)
     }
     display.appendChild(listingDiv)
     }
@@ -155,12 +156,12 @@ var listingDiv =  createElement("div", "listing")
 
   return;
   }
-function findListingId(element){
-  var el;
+function findListingId(){
+  
   while(el.className !== 'listing' || !el.className.parentNode){
      el = el.parentNode
   }
-  return el.id
+  console.log( el.id)
 }
 //==========================================================
 // Adding Click to Edit Functionality
