@@ -9,7 +9,7 @@ console.log("Sent Request..")
   xhr.responseType ="json";
   xhr.onreadystatechange = () =>{
         if (xhr.readyState === XMLHttpRequest.DONE) {
-             formatResponse(xhr.response))
+             formatResponse(xhr.response)
         }
   } 
   console.log("Data Sent", xhr.data)
@@ -107,7 +107,6 @@ ParentElement.appendChild(ul)
 //Renders HTML response for inventory
 function formatResponse(array){
   console.log(array)
-  var inventorySection = createElement("section", "inventory-holder")
 for(var i = 0; i < array.length; i++){ 
 var listingDiv =  createElement("div", "listing")
   var imageDiv = createElement("div", "image", listingDiv)
@@ -155,7 +154,8 @@ var listingDiv =  createElement("div", "listing")
 //==========================================================
 // Adding Click to Edit Functionality
 //=========================================================
-var inventoryListings = display
+var inventoryListings = display.children
+
 
 console.log("inventory Listings", inventoryListings)
 
