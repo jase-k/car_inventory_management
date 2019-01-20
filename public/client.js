@@ -104,6 +104,16 @@ function createListElements(array, className, ParentElement){
 ParentElement.appendChild(ul)
 }
 
+//Finds Event Target Listing's ID To Pass to an xhr event
+function findListingId(path){
+for(var i =0; i < path.length; i++){
+  if(path[i].className == 'listing'){
+    console.log(path[i].id)
+    return path[i].id
+    }
+  }
+}
+
 
 //Renders HTML response for inventory
 function formatResponse(array){
@@ -148,33 +158,26 @@ var listingDiv =  createElement("div", "listing")
       
   listingDiv.onclick = (event) =>{
   console.log("event target", event.path)
-    findListingId(event.path)
-    }
+   goToEditPage(findListingId(event.path))
+  }
     display.appendChild(listingDiv)
     }
   console.log("listing Div", listingDiv)
 
   return;
   }
-function findListingId(){
-  
-  while(el.className !== 'listing' || !el.className.parentNode){
-     el = el.parentNode
-  }
-  console.log( el.id)
+
+function goToEditPage(id){
+const xhr = new XMLHttpRequest;  
+const url = `/editcar/${id}`
+console.log("Sent Request..")
+  xhr.responseType ="json";
+  xhr.onreadystatechange = () =>{
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+             xhr.response
+        }
+  } 
+  console.log("Data Sent")
+  xhr.open('Get', url)
+  xhr.send();
 }
-//==========================================================
-// Adding Click to Edit Functionality
-//=========================================================
-var inventoryListings = document.getElementsByClassName('listing')
-
-
-console.log("inventory Listings", inventoryListings)
-
-inventoryListings.forEach(function(listing){
-
-  listing.onclick = (event) => {
-console.log(event.target)
-}
-
-});
