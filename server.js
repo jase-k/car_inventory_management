@@ -264,6 +264,25 @@ db.each('SELECT * FROM Inventory',
     })
 };
 
+function getAllIds(){
+return new Promise ((resolve, reject) =>{  
+  var idArray = []
+db.each('SELECT * FROM Inventory', (err, row)=>{
+    idArray.push(row.id)
+  },
+    err =>{
+    resolve(idArray)
+}
+       );
+  });
+};
+getAllIds().then(results => console.log(results))
+
+function AllCarInventory(){
+return new Promise((resolve, reject) =>{
+  
+});
+}
 
 //========================================
 // End of Functions Getting All Cars from the Database
