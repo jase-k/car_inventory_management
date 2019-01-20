@@ -13,7 +13,7 @@ console.log("Sent Request..")
   xhr.open('Get', url)
   xhr.send();
 //What needs to be created
- /*<div class="listing">
+ <div class="listing">
         <div class="image">
           <img src="https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/8640.jpg" />
         </div>
@@ -77,7 +77,7 @@ console.log("Sent Request..")
   </div> */
 function createElement(type, className, parentElement){
   var element = document.createElement(type)
-  element.classList.add(className)
+  if(className){element.classList.add(className)}
   if(parentElement){
     parentElement.appendChild(element)
   }
@@ -87,14 +87,24 @@ function createElement(type, className, parentElement){
 function formatResponse(array){
   console.log(array)
 var listingDiv =  createElement("div", "listing")
-var imageDiv = createElement("div", "image", listingDiv)
-var detailsDiv = createElement("div", "details", listingDiv)
-var image = createElement("div", 'img', imageDiv)
-image.src = "https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/8640.jpg"
+  
+  var imageDiv = createElement("div", "image", listingDiv)
+    var image = createElement("img", null , imageDiv)
+    image.src = "https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/8640.jpg" // array[i].image
 
-console.log("listing Div", listingDiv)
+  var detailsDiv = createElement("div", "details", listingDiv)
+    var quickfactsDiv = createElement("div", "quick-facts", detailsDiv)  
+      var quickfactsChildDiv1 = createElement("div", "quickfactsDiv", quickfactsDiv)
+        var makeH3 = createElement("h3", "make", quickfactsChildDiv1)
+        var modelH3 = create
+      var quickfactsChildDiv2 = createElement("div", "quickfactsDiv", quickfactsDiv)
+    var specshighlightsDiv = createElement("div", "specs-highlights", detailsDiv)
+    
+    var descriptionDiv = createElement("div", "description", detailsDiv)
 
-imageDiv.innerHTML = array[0].make;
+
+  console.log("listing Div", listingDiv)
+
 detailsDiv.innerHTML = array[1].make;
   return listingDiv
   }
