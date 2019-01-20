@@ -152,7 +152,14 @@ var listingDiv =  createElement("div", "listing")
   return inventorySection
   }
 
-
+//==========================================================
+// Adding Click to Edit Functionality
+//=========================================================
 
 const inventoryListings = document.getElementsByClassName('listing')
 console.log("inventory Listings", inventoryListings)
+
+inventoryListings.forEach(function(listing){
+listing.onclick = (event) =>
+
+});
