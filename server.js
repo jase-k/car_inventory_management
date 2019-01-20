@@ -133,7 +133,7 @@ return new Promise ((resolve, reject) =>{
 //=========================================
 
 //========================================
-// Start of Functions Getting Cars from the Database
+// Start of Functions Getting 1 Car from the Database
 //=========================================  
 function getCarInventory(id){
   var carObject = {};
@@ -207,7 +207,70 @@ getCarInventory(id)
 
 getCarById(2).then(data => console.log(data))
 //========================================
-// End of Functions Adding Cars to Database
+// End of Functions Getting 1 Car from the Database
+//=========================================
+//========================================
+// Start of Functions Getting All Cars from the Database
+//=========================================
+function getAllCarInventory(){
+  var carArray = [];
+  var carObject = {};
+return new Promise((resolve, reject) =>{
+    db.each('SELECT * FROM Inventory',
+        function(err, row){
+          if(err){console.log(err)}
+          if(row == undefined){reject("Couldn't Find Car by Id")}
+            carObject = {
+              id: row.id,
+              make: row.make,
+              model: row.model,
+              year: row.year,
+              price: row.price,
+              color: row.color,
+              description: row.description,
+              image: row.image
+              }
+            resolve(carObject)      
+  db.get('SELECT * FROM Specs WHERE inventory_id = $id',{$id: carObject.id},
+  (err, row) =>{
+  if(err){console.log(err)}
+  if(row == undefined){reject("Couldn't Find Specs Row")}
+
+      for(var i = 1; i <= 10; i++){
+        if(row["specs"+i]){
+          specsArray.push(row["specs"+i])
+        }
+      }
+      carObject.specs = specsArray
+      resolve(carObject)
+    })
+          },   
+          function (err, AllRows){
+            }
+            
+           )
+    })
+};
+
+function getCarHighlights(carObject){
+  var highlightsArray = [];
+  return new Promise((resolve, reject) => {
+    db.get('SELECT * FROM Highlights WHERE inventory_id = $id',{$id: carObject.id},
+    function(err, row){
+    if(err){console.log(err);}
+    if(row == undefined){reject("Couldn't Find Highlights Row")}
+        for(var i = 1; i <= 10; i++){
+          if(row['highlights'+i]){
+            highlightsArray.push(row['highlights'+i])
+          }
+        }
+    carObject.highlights = highlightsArray
+        resolve(carObject)
+      });
+  })
+}
+//========================================
+// End of Functions Getting All Cars from the Database
 //=========================================
  
 
