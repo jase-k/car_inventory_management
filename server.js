@@ -374,6 +374,11 @@ app.get('/editcar/:id', function(request, response){
   response.sendFile(__dirname+'/views/editcar.html')
 });
 
+app.get('/editcar', function(request, response){
+  var id = request.query.id
+  
+});
+
 //Uncomment Below to Print Tables in Console
 /*
 db.all('SELECT * FROM Inventory', (err, row)=>{

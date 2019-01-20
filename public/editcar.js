@@ -1,4 +1,9 @@
-console.log(document.)
+//This Sets the Id from the URL
+const pathName = document.location.pathname
+var paths = pathName.split('/')
+var id = paths[2]
+
+console.log(id)
 
 const submitButton = document.getElementById('submit-button')
 const addCarForm = document.getElementById('add-car-form')
@@ -6,6 +11,19 @@ const addCarForm = document.getElementById('add-car-form')
 // Send a Car to the DataBase
 //==========================================
 //console.log(submitButton)
+const xhr = new XMLHttpRequest;  
+const url = `/editcar?id`+id;
+console.log("Sent Request..")
+  xhr.responseType ="json";
+  xhr.onreadystatechange = () =>{
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            alert(xhr.response)
+        }
+  } 
+  console.log("Data Sent", xhr.data)
+  xhr.open('POST', url)
+  xhr.send();
+
 
 submitButton.onclick = () =>{
 console.log(addCarForm.elements)
