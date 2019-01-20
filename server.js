@@ -211,9 +211,9 @@ getCarInventory(id)
 //========================================
 // Start of Functions Getting All Cars from the Database
 //=========================================
-function getArrayIndexById(array, id){
-}
 
+// This Function Calls the Inventory Table and Gets the Cars Data
+//This Table DOEW NOT INCLUDE Specs or Highlights
 function getAllCarInventory(){
   var carArray = [];
   var highlightsArray = [];
@@ -243,6 +243,8 @@ db.each('SELECT * FROM Inventory',
     })
 };
 
+//This Function Takes the Array from the Inventory Table Results 
+//And Adds in the Specs Array
 function getAllSpecs(carObject){
   var carArray = [];
   var highlightsArray = [];
@@ -272,6 +274,8 @@ db.each('SELECT * FROM Specs',
     })
 }
 
+//This Function Takes the Array from the Inventory Table Results AND Specs Table Results
+//And Adds in the Highlights Array
 function getAllHighlights(carObject){
   var highlightsArray = [];
   var highlightsObject = {};
@@ -301,21 +305,7 @@ db.each('SELECT * FROM Highlights',
     })
 }  
 
-function getAllIds(){
-return new Promise ((resolve, reject) =>{  
-  var idArray = []
-db.each('SELECT * FROM Inventory', (err, row)=>{
-    idArray.push(row.id)
-  },
-    err =>{
-    resolve(idArray)
-}
-       );
-  });
-};
-
-
-
+//This is a Helper function used to combine the Tables
 function combineTableData(inventory, array, type){
  return new Promise((resolve, reject) => { 
   for(var i = 0; i < inventory.length; i++){
@@ -330,17 +320,15 @@ function combineTableData(inventory, array, type){
   });
 }
  
-function AllCarInventory(ids){
+//This Function uses the functions above to return an array of objects to use
+function getAllCars(){
 return new Promise((resolve, reject) =>{
-  for(var i = 0; i < ids.length; i++){
-    
-    } 
+getAllCarInventory()
+.then(results => getAllSpecs(results))
+.then(results => getAllHighlights(results))
+.then(results => resolve(results))
   });
 }
-getAllIds().then(results => console.log(results))
-getAllCarInventory().then(results => getAllSpecs(results))
-.then(results => getAllHighlights(results))
-.then(results => console.log(results))
 //========================================
 // End of Functions Getting All Cars from the Database
 //=========================================
@@ -374,9 +362,10 @@ if(typeof carObject.highlights === 'string'){
   
 });
 
+
 app.get('/allcars', function(request, response){
   
-  getAllCarInventory().then(data => response.json(data))
+  getAllCars().then(data => response.json(data))
   
 });
 
