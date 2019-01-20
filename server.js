@@ -373,7 +373,7 @@ app.get('/editcar/:id', function(request, response){
 });
 
 app.get('/editcar', function(request, response){
-  var id = request.query.id
+  var id = request.query.id 
   getCarById(id).then(results => console.log(results))
 });
  

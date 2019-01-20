@@ -2,6 +2,7 @@ const display = document.getElementById('inventory-holder')
 
 console.log(document)
 
+
 const xhr = new XMLHttpRequest;  
 const url = `/allcars`
 console.log("Sent Request..")
@@ -14,7 +15,10 @@ console.log("Sent Request..")
   console.log("Data Sent", xhr.data)
   xhr.open('Get', url)
   xhr.send();
-//What needs to be created
+
+
+//HTML Template for inventory Listings: 
+
  /* <div class="listing">
         <div class="image">
           <img src="https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/8640.jpg" />
@@ -77,6 +81,9 @@ console.log("Sent Request..")
           </div>
         </div>
   </div> */
+
+
+//Creates and new HTML element adds class and appends to Parent
 function createElement(type, className, parentElement){
   var element = document.createElement(type)
   if(className){element.classList.add(className)}
@@ -86,6 +93,7 @@ function createElement(type, className, parentElement){
     return element
 }
 
+//Creates <ul> and <li> elements from an array and appends them to a Parent
 function createListElements(array, className, ParentElement){
   var ul = createElement("ul", className)
     for(var i=0; i < array.length; i++){
@@ -94,6 +102,9 @@ function createListElements(array, className, ParentElement){
     }
 ParentElement.appendChild(ul)
 }
+
+
+//Renders HTML response for inventory
 function formatResponse(array){
   console.log(array)
   var inventorySection = createElement("section", "inventory-holder")
@@ -140,3 +151,8 @@ var listingDiv =  createElement("div", "listing")
 
   return inventorySection
   }
+
+
+
+const inventoryListings = document.getElementsByClassName('listing')
+console.log("inventory Listings", inventoryListings)
