@@ -26,9 +26,9 @@ function presetInputFields(object){
   yearField.value = object.year
   priceField.value = object.price
   colorField.value = object.color
-  descriptionField = object.description
-  specsField = object.specs.join(",")
-  highlightsField = object.highlights.join(",")
+  descriptionField.value = object.description
+  specsField.value= object.specs.join(",")
+  highlightsField.value = object.highlights.join(",")
 }
 
 //==========================================
