@@ -1,5 +1,7 @@
 const display = document.getElementById('inventory-holder')
 
+console.log(document)
+
 const xhr = new XMLHttpRequest;  
 const url = `/allcars`
 console.log("Sent Request..")
