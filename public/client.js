@@ -112,11 +112,20 @@ var listingDiv =  createElement("div", "listing")
         var colorP = createElement("p", "color", quickfactsChildDiv2)
             colorP.innerHTML = array[i].color
     var specshighlightsDiv = createElement("div", "specs-highlights", detailsDiv)
-    
+        var specsH4 = createElement("h4", null, specshighlightsDiv)
+        var specsList = createElement("ul", "specs", specshighlightsDiv)
+        var highlightsH4 = createElement("h4", null, specshighlightsDiv)
+        var highlightsUl = createElement("ul", "highlights", specshighlightsDiv)
     var descriptionDiv = createElement("div", "description", detailsDiv)
     display.appendChild(listingDiv)
     }
-
+function createListElements(array, className){
+  var ul = createElement("ul", className)
+    for(var i=0; i < array.length; i++){
+    var li = createElement("li", null, ul)
+      li.innerHTML = array[i]
+    }
+}
   console.log("listing Div", listingDiv)
 
   return inventorySection
