@@ -6,7 +6,7 @@ console.log("Sent Request..")
   xhr.responseType ="json";
   xhr.onreadystatechange = () =>{
         if (xhr.readyState === XMLHttpRequest.DONE) {
-             console.log(formatResponse(xhr.response))
+             display.appendChild(formatResponse(xhr.response))
         }
   } 
   console.log("Data Sent", xhr.data)
@@ -78,6 +78,7 @@ console.log("Sent Request..")
 function createElement(type, className){
   var element = document.createElement(type)
   element.classList.add(className)
+  return element
 }
 
 function formatResponse(array){
@@ -86,7 +87,7 @@ var listingDiv =  createElement("div", "listing")
 var imageDiv = createElement("div", "image")
 var detailsDiv = createElement("div", "details")
   console.log("listing Div", listingDiv)
-imageDiv.innerText = array[0].make;
+imageDiv.innerHTML = array[0].make;
 detailsDiv.innerHTML = array[1].make;
   listingDiv.appendChild(imageDiv)
   listingDiv.appendChild(detailsDiv)
