@@ -54,7 +54,7 @@ h4{
   border-radius: 20px;
 }
 .image {
-  max-width: 49%;
+  max-width: 33%;
   content: center;
   margin-right: auto; 
   margin-left: auto;
@@ -66,7 +66,7 @@ h4{
 }
 .details{
     background-color: #A9A9A9	;
-    margin: 15px;
+    margin: 5px 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -77,21 +77,25 @@ h4{
   display: block;  
   border-radius: 10px;
   background-color: #D3D3D3;
+  margin: 5px 15px;
 }
 .quickfactsDiv{
   display:flex;
   justify-content: space-around;
-  margin: 10px auto;
+  margin: 5px auto;
   background-color: #D3D3D3;
 }
 .specs-highlights{
   display: flex;
   background-color: #D3D3D3;
   border-radius: 10px;
+  margin: 5px 15px;
 }
 .description {
   border-radius: 10px;
   background-color: #D3D3D3;
+  margin: 5px 15px;
+  
 }
 .description p{
   margin: 3px 5px;
