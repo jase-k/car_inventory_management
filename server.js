@@ -220,9 +220,31 @@ function updateInventory(object){
   db.run(inventorySQL) 
 }
 function updateSpecs(object){
-
+  var values;
+  for(var i =1; i <= object.specs.length; i++){
+    values += 'specs'+i+' = '+object.specs[i-1]+','
+  }
+  var sql =`UPDATE Specs
+          SET ${values}
+          WHERE inventory_id = ${object.id} `
+console.log("Specs", sql)
+  
+   db.run(sql);  
+}
+function updateHighlights(object){
+  var values;
+  for(var i =1; i <= object.highlights.length; i++){
+    values += 'highlights'+i+' = '+object.highlights[i-1]+','
+  }
+var sql =`UPDATE Highlights
+          SET ${values}
+          WHERE inventory_id = ${object.id} `
+console.log("Highlights", swl
+db.run(sql)
 }
 updateInventory(fordCar)
+
+
 
 //========================================
 // End of Functions Updating Car from the Database
