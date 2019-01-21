@@ -214,7 +214,7 @@ getCarInventory(id)
 function updateInventory(object){
   var inventorySQL = `UPDATE Inventory
             SET make = '${object.make}', model = '${object.model}', year=${object.year}, price='${object.price}', 
-            color='${object.color}', description = '${object.description}'
+            color='${object.color}', description = '${object.description}', image='${object.image}'
             WHERE id = ${object.id}`
   console.log("SQL Data:", inventorySQL)
   db.run(inventorySQL) 
@@ -223,7 +223,7 @@ function updateSpecs(object){
   var values = [];
   var array = stringToArray(object.specs)
   for(var i =1; i <= array.length; i++){
-    values.push('specs'+i+' = "'+object.specs[i-1]+'"')
+    values.push('specs'+i+' = "'+array[i-1]+'"')
   }
   var sql =`UPDATE Specs
           SET ${values}
@@ -234,10 +234,10 @@ console.log("Specs", sql)
 }
 function updateHighlights(object){
   var values = [];
+  var array = stringToArray(object.highlights)
+for(var i =1; i <= array.length; i++){
   
-for(var i =1; i <= object.highlights.length; i++){
-  
-  values.push('highlights'+i+' = "'+object.highlights[i-1]+'"')
+  values.push('highlights'+i+' = "'+array[i-1]+'"')
   } 
   
   console.log(object.highlights.length)
