@@ -2,6 +2,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var path = require('path');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -10,7 +11,7 @@ app.use(express.static('public'));
 
 // init sqlite db
 var fs = require('fs');
-var dbFile = './.data/sqlite.db';
+var dbFile = path.resolve(__dirname, './.data/sqlite.db');
 var exists = fs.existsSync(dbFile);
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(dbFile);
