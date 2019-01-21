@@ -220,38 +220,38 @@ function updateInventory(object){
   db.run(inventorySQL) 
 }
 function updateSpecs(object){
-  var values;
+  var values = [];
   for(var i =1; i <= object.specs.length; i++){
-    values.push('specs'+i+' = '+object.specs[i-1]+'
+    values.push('specs'+i+' = "'+object.specs[i-1]+'"')
   }
   var sql =`UPDATE Specs
           SET ${values}
-          WHERE inventory_id = ${object.id} `
+          WHERE inventory_id = "${object.id}" `
 console.log("Specs", sql)
   
    db.run(sql);  
 }
 function updateHighlights(object){
-  let values;
-  /*
+  var values = [];
+  
 for(var i =1; i <= object.highlights.length; i++){
-  if(i =1){
-    var values = 'highlights'+i+' = '+object.highlights[i-1]+','
-    }else{
-    values = 'highlights'+i+' = '+object.highlights[i-1]+','
-    }
-  } */
+  
+  values.push('highlights'+i+' = "'+object.highlights[i-1]+'"')
+  } 
+  
   console.log(object.highlights.length)
 var sql =`UPDATE Highlights
           SET ${values}
-          WHERE inventory_id = ${object.id} `
+          WHERE inventory_id = "${object.id}" `
 console.log("Highlights", sql)
 db.run(sql)
 }
-updateInventory(fordCar)
-updateSpecs(fordCar)
-updateHighlights(fordCar)
 
+function updateObject(object){
+updateInventory(object)
+updateSpecs(object)
+updateHighlights(object)
+}
 
 //========================================
 // End of Functions Updating Car from the Database
@@ -424,6 +424,11 @@ app.get('/editcar', function(request, response){
   var id = request.query.id 
   console.log(id)
   getCarById(id).then(results => response.json(results))
+});
+
+app.put('/updatecar', function(request, response){
+  var object = request.query
+  updateObject(object)
 });
  
 //Uncomment Below to Print Tables in Console
