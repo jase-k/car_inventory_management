@@ -28,7 +28,7 @@ var chevyCar = {
   highlights: ["Bluetooth", "Sun Roof", "LightWeight"]
 }
 var fordCar = {
-  id: 13,
+  id: 1,
   make: "Ford",
   model: "Fusion",
   year: 2014,
@@ -212,14 +212,17 @@ getCarInventory(id)
 // Start of Functions Updating Car from the Database
 //=========================================
 function updateInventory(object){
-  var sql = `UPDATE Inventory
-            SET make = ${object.make} model = ${object.model} year=${object.year} price=${object.price} 
-            color=${object.color} description = ${object.description}
+  var inventorySQL = `UPDATE Inventory
+            SET make = '${object.make}', model = '${object.model}', year=${object.year}, price='${object.price}', 
+            color='${object.color}', description = '${object.description}'
             WHERE id = ${object.id}`
-  console.log("SQL Data:", sql)
-  db.run(sql)
+  console.log("SQL Data:", inventorySQL)
+  db.run(inventorySQL) 
 }
+function updateSpecs(object){
 
+}
+updateInventory(fordCar)
 
 //========================================
 // End of Functions Updating Car from the Database
