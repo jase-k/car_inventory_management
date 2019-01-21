@@ -40,7 +40,7 @@ section{
 div {
   width: 80%;
   height: auto;
-  margin: 20px; 
+  margin: 20px;
   background-color: white;
 }
 /* Inventory Feed */
@@ -52,11 +52,12 @@ h4{
   display: flex;
   margin: 20px auto;
   border-radius: 20px;
+  cursor: pointer;
 }
 .image {
   max-width: 33%;
   content: center;
-  margin-right: auto; 
+  margin-right: auto;
   margin-left: auto;
   justify-content: center;
 }
@@ -74,7 +75,7 @@ h4{
     border-radius: 15px;
 }
 .quick-facts{
-  display: block;  
+  display: block;
   border-radius: 10px;
   background-color: #D3D3D3;
   margin: 5px 15px;
@@ -95,7 +96,7 @@ h4{
   border-radius: 10px;
   background-color: #D3D3D3;
   margin: 5px 15px;
-  
+
 }
 .description p{
   margin: 3px 5px;
