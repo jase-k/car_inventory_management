@@ -222,7 +222,7 @@ function updateInventory(object){
 function updateSpecs(object){
   var values;
   for(var i =1; i <= object.specs.length; i++){
-    values += 'specs'+i+' = '+object.specs[i-1]+','
+    values.push('specs'+i+' = '+object.specs[i-1]+'
   }
   var sql =`UPDATE Specs
           SET ${values}
@@ -232,18 +232,25 @@ console.log("Specs", sql)
    db.run(sql);  
 }
 function updateHighlights(object){
-  var values;
-  for(var i =1; i <= object.highlights.length; i++){
-    values += 'highlights'+i+' = '+object.highlights[i-1]+','
-  }
+  let values;
+  /*
+for(var i =1; i <= object.highlights.length; i++){
+  if(i =1){
+    var values = 'highlights'+i+' = '+object.highlights[i-1]+','
+    }else{
+    values = 'highlights'+i+' = '+object.highlights[i-1]+','
+    }
+  } */
+  console.log(object.highlights.length)
 var sql =`UPDATE Highlights
           SET ${values}
           WHERE inventory_id = ${object.id} `
-console.log("Highlights", swl
+console.log("Highlights", sql)
 db.run(sql)
 }
 updateInventory(fordCar)
-
+updateSpecs(fordCar)
+updateHighlights(fordCar)
 
 
 //========================================
