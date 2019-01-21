@@ -4,17 +4,23 @@ var bodyParser = require('body-parser');
 var app = express();
 var path = require('path');
 app.use(bodyParser.urlencoded({ extended: true }));
-
+var sqlite3 = require('sqlite3')
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
 // init sqlite db
 var fs = require('fs');
-var dbFile = path.resolve(__dirname, './.data/sqlite.db');
+console.log(__dirname+'/sqlite.db')
+var dbFile = path.resolve(__dirname+'/sqlite.db');
+var db = new sqlite3.Database(dbFile, (err)=>{
+  if(err){
+    console.log("line 28:")
+    console.log(err)}
+  });
 var exists = fs.existsSync(dbFile);
+console.log("Does the File Exist?", exists)
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database(dbFile);
 
 //Sample Car Objects
 var chevyCar = {
@@ -43,15 +49,18 @@ var fordCar = {
 
 
 //Creates the Tables Below in the Database. (Will Need to Delete to Store Data)
-/*
+
 db.serialize(()=>{
-  db.run('DROP TABLE IF EXISTS Inventory');
-  db.run('CREATE TABLE Inventory (id INTEGER PRIMARY KEY, make TEXT NOT NULL, model TEXT NOT NULL, year INTEGER NOT NULL, price TEXT NOT NULL, color TEXT, description TEXT, specs_id INTEGER, highlights_id INTEGER, image TEXT)');
-  db.run('DROP TABLE IF EXISTS Specs')
-  db.run('CREATE TABLE Specs (id INTEGER PRIMARY KEY, inventory_id INTEGER NOT NULL, specs1, specs2, specs3, specs4, specs5, specs6, specs7, specs8, specs9, specs10)')
-  db.run('DROP TABLE IF EXISTS Highlights')
-  db.run('CREATE TABLE Highlights (id INTEGER PRIMARY KEY, inventory_id INTEGER NOT NULL, highlights1, highlights2, highlights3, highlights4, highlights5, highlights6, highlights7, highlights8, highlights9, highlights10)')
-})*/
+  db.run('CREATE TABLE IF NOT EXISTS Inventory (id INTEGER PRIMARY KEY, make TEXT NOT NULL, model TEXT NOT NULL, year INTEGER NOT NULL, price TEXT NOT NULL, color TEXT, description TEXT, specs_id INTEGER, highlights_id INTEGER, image TEXT)', (err)=>{
+    if(err){console.log(err)}
+  });
+  db.run('CREATE TABLE IF NOT EXISTS Specs (id INTEGER PRIMARY KEY, inventory_id INTEGER NOT NULL, specs1, specs2, specs3, specs4, specs5, specs6, specs7, specs8, specs9, specs10)', (err) =>{
+    if(err){console.log(err);}
+  })
+  db.run('CREATE TABLE IF NOT EXISTS Highlights (id INTEGER PRIMARY KEY, inventory_id INTEGER NOT NULL, highlights1, highlights2, highlights3, highlights4, highlights5, highlights6, highlights7, highlights8, highlights9, highlights10)', (err)=>{
+    if(err){console.log(err);}
+  })
+})
 //========================================
 // Start of Functions Adding Cars to Database
 //=========================================
@@ -98,7 +107,7 @@ return new Promise ((resolve, reject) =>{
       },
      function(err){
       if(err){console.log(err)
-      reject("Failed At: Inventory Table")     
+      reject("Failed At: Inventory Table")
              }
       console.log(this.lastID)
       var inventory_id = this.lastID //saves Row Id to use in the other tables
@@ -120,14 +129,14 @@ return new Promise ((resolve, reject) =>{
           reject("Failed At: Highlights Table")
         }
         console.log("highlights_id:", this.lastID)
-        resolve("Success")  
+        resolve("Success")
         })
       });
     });
   })
 }
 
-// addCar(chevyCar); 
+// addCar(chevyCar);
 // addCar(fordCar);
 //========================================
 // End of Functions Adding Cars to Database
@@ -135,7 +144,7 @@ return new Promise ((resolve, reject) =>{
 
 //========================================
 // Start of Functions Getting 1 Car from the Database
-//=========================================  
+//=========================================
 function getCarInventory(id){
   var carObject = {};
 return new Promise((resolve, reject) =>{
@@ -214,11 +223,11 @@ getCarInventory(id)
 //=========================================
 function updateInventory(object){
   var inventorySQL = `UPDATE Inventory
-            SET make = '${object.make}', model = '${object.model}', year=${object.year}, price='${object.price}', 
+            SET make = '${object.make}', model = '${object.model}', year=${object.year}, price='${object.price}',
             color='${object.color}', description = '${object.description}', image='${object.image}'
             WHERE id = ${object.id}`
   console.log("SQL Data:", inventorySQL)
-  db.run(inventorySQL) 
+  db.run(inventorySQL)
 }
 function updateSpecs(object){
   var values = [];
@@ -230,17 +239,17 @@ function updateSpecs(object){
           SET ${values}
           WHERE inventory_id = "${object.id}" `
 console.log("Specs", sql)
-  
-   db.run(sql);  
+
+   db.run(sql);
 }
 function updateHighlights(object){
   var values = [];
   var array = stringToArray(object.highlights)
 for(var i =1; i <= array.length; i++){
-  
+
   values.push('highlights'+i+' = "'+array[i-1]+'"')
-  } 
-  
+  }
+
   console.log(object.highlights.length)
 var sql =`UPDATE Highlights
           SET ${values}
@@ -285,7 +294,7 @@ db.each('SELECT * FROM Inventory',
               image: row.image
               }
       carArray.push(carObject)
-          },   
+          },
   function (err, AllRows){
         resolve(carArray)
             }
@@ -293,7 +302,7 @@ db.each('SELECT * FROM Inventory',
     })
 };
 
-//This Function Takes the Array from the Inventory Table Results 
+//This Function Takes the Array from the Inventory Table Results
 //And Adds in the Specs Array
 function getAllSpecs(carObject){
   var carArray = [];
@@ -316,7 +325,7 @@ db.each('SELECT * FROM Specs',
       }
     }
           specsArray.push(specsObject)
-                },   
+                },
   function (err, AllRows){
   combineTableData(carObject, specsArray, 'specs').then(results => resolve(results))
             }
@@ -345,29 +354,29 @@ db.each('SELECT * FROM Highlights',
       }
     }
           highlightsArray.push(highlightsObject)
-                },   
+                },
   function (err, AllRows){
   combineTableData(carObject, highlightsArray, 'highlights').then(results => resolve(results))
             }
            )
     })
-}  
+}
 
 //This is a Helper function used to combine the Tables
 function combineTableData(inventory, array, type){
- return new Promise((resolve, reject) => { 
+ return new Promise((resolve, reject) => {
   for(var i = 0; i < inventory.length; i++){
     for(var j =0; j<array.length; j++){
       if(inventory[i].id === array[j].inventory_id){
         inventory[i][type] = array[j].array
         break;
-        } 
+        }
       }
     }
   resolve(inventory)
   });
 }
- 
+
 //This Function uses the functions above to return an array of objects to use
 function getAllCars(){
 return new Promise((resolve, reject) =>{
@@ -380,7 +389,7 @@ getAllCarInventory()
 //========================================
 // End of Functions Getting All Cars from the Database
 //=========================================
-  
+
 
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
@@ -396,7 +405,7 @@ return str.split(",")
 
 app.post('/addnewcar', function(request, response){
   var carObject = request.query
- 
+
   if(typeof carObject.specs === 'string'){
     console.log("Specs is String")
   carObject.specs = stringToArray(carObject.specs)
@@ -405,16 +414,16 @@ if(typeof carObject.highlights === 'string'){
     console.log("Highlights is String")
   carObject.highlights = stringToArray(carObject.highlights)
   }
-   
+
   addCar(carObject).then(results => response.send(results))
-  
+
 });
 
 
 app.get('/allcars', function(request, response){
-  
+
   getAllCars().then(data => response.json(data))
-  
+
 });
 
 app.get('/editcar/:id', function(request, response){
@@ -423,7 +432,7 @@ app.get('/editcar/:id', function(request, response){
 });
 
 app.get('/editcar', function(request, response){
-  var id = request.query.id 
+  var id = request.query.id
   console.log(id)
   getCarById(id).then(results => response.json(results))
 });
@@ -432,7 +441,7 @@ app.put('/updatecar', function(request, response){
   var object = request.query
   updateObject(object)
 });
- 
+
 //Uncomment Below to Print Tables in Console
 /*
 db.all('SELECT * FROM Inventory', (err, row)=>{
@@ -445,9 +454,8 @@ db.all('SELECT * FROM Highlights', (err, row)=>{
         console.log("Higlights Table:", row)
       });
 */
-
+var PORT = 3500
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
+var listener = app.listen(PORT, function() {
+  console.log('Your app is listening on port ' + PORT);
 });
- 
