@@ -1,6 +1,6 @@
 # Car Inventory Management System
 
-This Project was created to help start a database system for a Car Dealership. This project allows the adding, editing, and viewing of inventory. 
+This Project was created to help start a inventory system for a Car Dealership. This project allows the adding, editing, and viewing of inventory. 
 
 ## Built With
 
@@ -30,8 +30,10 @@ The app will load on localhost:3500 in your browser
 
 ## Using the App
 
-On intial load you will be brought to a blank blue screen with a header. The header contains 'Inventory' and 'Add Car' tabs to navigate the application. 
+On intial load, you will be brought to a blank blue screen with a header. The header contains 'Inventory' and 'Add Car' tabs to navigate the application. 
+
 The 'Inventory' navigation will take you to the page that loads the whole car inventory. 
+
 The 'Add Car' navigation will take you to the form to add a car to your inventory. 
 
 ### Add Car
@@ -41,11 +43,11 @@ In the 'Add Car' Form you will be required to fill out make, model, price, year,
 **Image container is NOT meant  upload files. It will only render image URLS**
 *Since this is used for internal use of the dealership, a stock car image is all that is neccessary. This image can be googled and the image address be copied and pasted into the Image container*
 
-clicking `submit` will add the car to the database
+Clicking `submit` will add the car to the database
 
 ### Edit Car
 
-To navigate to Edit a car, click the listing in the 'Inventory Page'. This will navigate you to a form identical to the 'Add Car' form. The values from the listing will automatically be the values of the form. 
+To Edit a car, click the listing in the 'Inventory Page'. This will navigate you to a form identical to the 'Add Car' form. The values from the listing will automatically be the values of the form. 
 You can edit these as needed and click `submit` to save changes. 
 
 ### Delete Car
