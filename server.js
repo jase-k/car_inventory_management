@@ -214,10 +214,10 @@ getCarInventory(id)
 function updateInventory(object){
   var sql = `UPDATE Inventory
             SET make = ${object.make} model = ${object.model} year=${object.year} price=${object.price} 
-            color=${object.color} 
+            color=${object.color} description = ${object.description}
             WHERE id = ${object.id}`
   console.log("SQL Data:", sql)
-  db.run(sql, {$id:object.id})
+  db.run(sql)
 }
 
 
