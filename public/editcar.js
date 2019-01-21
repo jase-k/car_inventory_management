@@ -65,7 +65,7 @@ var formData =  {
 // ||formData.model !== ''||formData.year !== ''||formData.price !== ''||formData.color !== ''  ||formData.description !== ''||formData.specs !== '' || formData.highlights !== ''
 if(formData.make !== ''){
 const xhr = new XMLHttpRequest;  
-const url = `/addnewcar?make=${formData.make}&model=${formData.model}&year=${formData.year}&price=${formData.price}
+const url = `/updatecar?id=${id}&make=${formData.make}&model=${formData.model}&year=${formData.year}&price=${formData.price}
 &color=${formData.color}&description=${formData.description}&image=${formData.image}&specs=${formData.specs}&highlights=${formData.highlights}`;
 console.log("Sent Request..")
   xhr.responseType ="json";
@@ -75,7 +75,7 @@ console.log("Sent Request..")
         }
   } 
   console.log("Data Sent", xhr.data)
-  xhr.open('POST', url)
+  xhr.open('PUT', url)
   xhr.send();
   }else{ alert("Please Complete the Form before Submitting")}
 }

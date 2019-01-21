@@ -221,7 +221,8 @@ function updateInventory(object){
 }
 function updateSpecs(object){
   var values = [];
-  for(var i =1; i <= object.specs.length; i++){
+  var array = stringToArray(object.specs)
+  for(var i =1; i <= array.length; i++){
     values.push('specs'+i+' = "'+object.specs[i-1]+'"')
   }
   var sql =`UPDATE Specs
