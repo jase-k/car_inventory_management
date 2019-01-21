@@ -29,7 +29,7 @@ console.log("Sent Request..")
   xhr.responseType ="json";
   xhr.onreadystatechange = () =>{
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            alert(xhr.response)
+            alert('Success!')
         }
   } 
   console.log("Data Sent", xhr.data)
