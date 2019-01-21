@@ -4,13 +4,13 @@ This Project was created to help start a database system for a Car Dealership. T
 
 ## Built With
 
-###languages:
--html
--css
--javascript
--node.js
+### languages:
+- html
+- css
+- javascript
+- node.js
 
-###packages:
+### packages:
 - sqlite3
 - express
 
@@ -43,16 +43,16 @@ In the 'Add Car' Form you will be required to fill out make, model, price, year,
 
 clicking `submit` will add the car to the database
 
-###Edit Car
+### Edit Car
 
 To navigate to Edit a car, click the listing in the 'Inventory Page'. This will navigate you to a form identical to the 'Add Car' form. The values from the listing will automatically be the values of the form. 
 You can edit these as needed and click `submit` to save changes. 
 
-###Delete Car
+### Delete Car
 
 Currently this option is unavailable. If a car needs to be deleted, you can click on the listing and change the information to a car that needs to be added. This will replace the car data with the new data
 
-###Sort Inventory
+### Sort Inventory
 
 Currenlty this option is unavailable. Inventory is listed in the order it is Added. 
 
