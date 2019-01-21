@@ -11,7 +11,6 @@ app.use(express.static('public'));
 
 // init sqlite db
 var fs = require('fs');
-console.log(__dirname+'/sqlite.db')
 var dbFile = path.resolve(__dirname+'/sqlite.db');
 var db = new sqlite3.Database(dbFile, (err)=>{
   if(err){
@@ -136,8 +135,6 @@ return new Promise ((resolve, reject) =>{
   })
 }
 
-// addCar(chevyCar);
-// addCar(fordCar);
 //========================================
 // End of Functions Adding Cars to Database
 //=========================================
